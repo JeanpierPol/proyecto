@@ -1,4 +1,6 @@
 import http from 'http';
+import errorHandler from './src/middlewares/errorMiddleware.js';
+
 
 import connectDB from './src/config/database.js';
 import config from './config.js';
@@ -10,6 +12,7 @@ const { PORT } = config;
 const startServer = async () => {
     try {
         await connectDB();
+        app.use(errorHandler);
 
         server.listen(PORT, () => {
             console.log(`Servidor listo en http://localhost:${PORT}`);

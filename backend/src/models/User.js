@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import moment from 'moment';
+
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -14,7 +16,7 @@ const userSchema = new mongoose.Schema({
         required: [true, 'La fecha de nacimiento es obligatoria'],
         validate: {
             validator: function (value) {
-                return value <= new Date();
+               return moment(value).isSameOrBefore(moment());
             },
             message: 'La fecha de nacimiento no puede estar en el futuro',
         }
