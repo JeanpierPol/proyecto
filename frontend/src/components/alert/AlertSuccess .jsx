@@ -1,0 +1,9 @@
+export default function AlertSuccess ({ text }) {
+    return (
+        <div className="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-3"></i>
+            {text}
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    );
+}
