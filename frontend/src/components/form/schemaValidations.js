@@ -24,7 +24,7 @@ const schema = yup.object({
         .nullable()
         .required('La fecha de nacimiento es obligatoria')
         .max(new Date(), 'La fecha no puede ser futura'),
-        
+
     email: yup
         .string()
         .required('El email es obligatorio')
@@ -52,7 +52,12 @@ const schema = yup.object({
         .test('fileFormat', 'El archivo debe ser una imagen', (file) => {
             if (!file || file.length === 0) return true;
             return ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/gif'].includes(file[0]?.type);
+        })
+        .test('fileSize', 'El archivo debe ser menor a 5MB', (file) => {
+            if (!file || file.length === 0) return true;
+            return file[0]?.size <= 5 * 1024 * 1024; 
         }),
+
 
 
     privacy: yup

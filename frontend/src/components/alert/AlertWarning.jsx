@@ -1,4 +1,4 @@
-export default function AlertWarning({ text }) {
+export const AlertWarning = ({ text })=> {
     return (
         <div className="alert alert-warning alert-dismissible fade show" role="alert">
             <i className="bi bi-exclamation-triangle me-2"></i>

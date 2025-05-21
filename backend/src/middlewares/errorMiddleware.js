@@ -19,10 +19,5 @@ export const multerError = (err, req, res, next) => {
     }
     return res.status(400).json({ error: 'Error al subir archivo: ' + err.message });
   }
-
-  if (err.message === 'Solo se permiten imágenes JPG/PNG') {
-    return res.status(400).json({ error: err.message });
-  }
-
   next(err);
 };
