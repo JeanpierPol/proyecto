@@ -18,9 +18,13 @@ const schema = yup.object({
 
     birthDate: yup
         .date()
+        .transform((value, originalValue) => {
+            return originalValue === "" ? null : value;
+        })
+        .nullable()
         .required('La fecha de nacimiento es obligatoria')
         .max(new Date(), 'La fecha no puede ser futura'),
-
+        
     email: yup
         .string()
         .required('El email es obligatorio')
@@ -46,9 +50,10 @@ const schema = yup.object({
         .nullable()
         .notRequired()
         .test('fileFormat', 'El archivo debe ser una imagen', (file) => {
-            if (!file) return true;
-            return ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'].includes(file.type);
+            if (!file || file.length === 0) return true;
+            return ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/gif'].includes(file[0]?.type);
         }),
+
 
     privacy: yup
         .boolean()
