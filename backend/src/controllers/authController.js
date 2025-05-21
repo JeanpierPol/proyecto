@@ -5,11 +5,11 @@ import { createUserValidations } from '../validations/userValidations.js';
 
 const authController = {
   createUserController: [
-    // ...createUserValidations,
+    ...createUserValidations,
     async (req, response) => {
       try {
         const { name, lastName, birthDate, email, password, avatar, rol } = req.body;
-        const avatarPath = '';
+        const avatarPath  = req.file ? `/uploads/${req.file.filename}` : null;
         const newUser = {
           name,
           lastName,
@@ -24,7 +24,7 @@ const authController = {
         response.status(201).json({ message: 'Usuario registrado exitosamente' });
 
       } catch (error) {
-        response.status(400).json({ error: error });
+        response.status(400).json({ error: error?.message || error });
       }
     }
   ],
@@ -91,13 +91,13 @@ const authController = {
       }
     }
   ],
-  
+
 
   editUserController: [
     async (req, res) => {
       try {
         const userId = req.userId;
-        const { name, lastName} = req.body;
+        const { name, lastName } = req.body;
         const avatarPath = req.file ? `/uploads/${req.file.filename}` : null;
 
         const updatedFields = {};

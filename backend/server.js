@@ -1,5 +1,5 @@
 import http from 'http';
-import errorHandler from './src/middlewares/errorMiddleware.js';
+import {errorHandler} from './src/middlewares/errorMiddleware.js';
 
 
 import connectDB from './src/config/database.js';

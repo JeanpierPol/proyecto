@@ -46,7 +46,7 @@ const createUserValidations = [
 
     body('avatar')
         .optional()
-        .isString().withMessage('El avatar debe ser una URL o string'),
+        .isString().withMessage('Formato no valido'),
 
     body('rol')
         .optional()
@@ -75,7 +75,7 @@ const editUserValidations = [
 
     body('avatar')
         .optional()
-        .isString().withMessage('El avatar debe ser una URL o string'),
+        .isString().withMessage('Formato no valido'),
     validateResult,
 ];
 
