@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 import { registerRequest } from "../api/auth";
-
+import { useFeedback } from "./FeedbackContext";
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -13,18 +13,19 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [IsAuthenticated, setIsAuthenticated] = useState(false);
+    const { showSuccess, showError } = useFeedback();
 
     const signup = async (user) => {
         try {
             const res = await registerRequest(user);
             setUser(res.data);
             setIsAuthenticated(true);
-
+            showSuccess(res.data.message)
         } catch (error) {
-            console.log(error.response.data);
+            showError(error.response.data.error)
         }
     };
-    
+
     return (
         <AuthContext.Provider
             value={{
