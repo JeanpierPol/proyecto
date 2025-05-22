@@ -1,25 +1,23 @@
-import React, { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 import schema from './schemaValidations';
-
-import { AlertSuccess } from '../alert/AlertSuccess ';
-import { AlertWarning } from '../alert/AlertWarning';
 
 import { AvatarComponents } from '../AvatarComponents';
 import { FormComponent } from './FormComponent';
 
-import { registerRequest } from '../../api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 export const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         resolver: yupResolver(schema)
     });
-
-    const today = new Date().toISOString().split('T')[0];
+    const { signup, IsAuthenticated } = useAuth();
     const [previewUrl, setPreviewUrl] = useState(null);
+    const navigate = useNavigate();
     const avatarFile = watch('avatar');
-    const [feedback, setFeedback] = useState(null);
+    const today = new Date().toISOString().split('T')[0];
 
     useEffect(() => {
         if (avatarFile && avatarFile[0]) {
@@ -28,6 +26,13 @@ export const RegisterForm = () => {
             return () => URL.revokeObjectURL(url);
         }
     }, [avatarFile]);
+
+    useEffect(() => {
+        if (IsAuthenticated) {
+            navigate('/');
+        }
+    }, [IsAuthenticated]);
+
 
     const inputs = [
         { name: 'name', label: 'Nombre' },
@@ -39,7 +44,6 @@ export const RegisterForm = () => {
     ];
 
     const onSubmit = async (data) => {
-        setFeedback(null);
         const { name, lastName, birthDate, avatar, email, password } = data;
         let newData = {
             name,
@@ -50,15 +54,8 @@ export const RegisterForm = () => {
             password
         };
 
-        try {
-            let request = await registerRequest(newData);
-            setFeedback(<AlertSuccess text={request.data.message} />);
-        } catch (error) {
-            setFeedback(<AlertWarning text={error.response?.data?.error || 'Error al registrar'} />);
-        }
+        signup(newData)
     };
-
-
 
     return (
         <div className="form register container mt-5">
@@ -66,7 +63,6 @@ export const RegisterForm = () => {
                 <div className="card-body p-4">
                     <h2 className="card-title mb-4 text-center">Registro</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        {feedback && <div className="mb-3">{feedback}</div>}
                         <div className="row">
                             {inputs.slice(0, 2).map(input => (
                                 <div key={input.name} className="col-md-6 mb-3">
