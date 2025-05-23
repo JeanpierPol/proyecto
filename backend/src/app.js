@@ -4,6 +4,7 @@ import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 
+import authMiddleware from './middlewares/authMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);

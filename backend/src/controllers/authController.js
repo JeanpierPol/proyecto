@@ -3,13 +3,15 @@ import config from '../../config.js';
 import { registerUser, loginUser, editUser, getFullUserInfo } from '../service/userServices.js';
 import { createUserValidations } from '../validations/userValidations.js';
 
+
+const { SECRET_JWT_KEY } = config
 const authController = {
   createUserController: [
     ...createUserValidations,
     async (req, response) => {
       try {
         const { name, lastName, birthDate, email, password, avatar, rol } = req.body;
-        const avatarPath  = req.file ? `/uploads/${req.file.filename}` : null;
+        const avatarPath = req.file ? `/uploads/${req.file.filename}` : null;
         const newUser = {
           name,
           lastName,
@@ -35,13 +37,12 @@ const authController = {
         const { email, password } = req.body;
         const user = await loginUser(email, password);
 
-        const token = jwt.sign({ id: user._id, email: user.email, avatar: user.avatar, rol: user.rol }, config.SECRET_JWT_KEY, { expiresIn: "24h" });
-
+        const token = jwt.sign({ id: user._id, email: user.email, avatar: user.avatar, rol: user.rol }, SECRET_JWT_KEY, { expiresIn: "24h" });
         response
           .cookie('token', token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'Lax',
+            secure: true,
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000
           })
           .status(200)
