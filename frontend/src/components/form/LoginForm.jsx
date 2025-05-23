@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormComponent } from './FormComponent';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
 import loginSchema from '../../validations/loginSchema';
 import { useAuth } from '../../context/AuthContext';
 
@@ -41,6 +42,9 @@ export const LoginForm = () => {
 
                         <button className="btn btn-primary w-100" type="submit">Login</button>
                     </form>
+                    <div>
+                        <p>¿No tienes cuenta? <Link className='link-offset-2 link-underline link-underline-opacity-0' to="/register">Registrate</Link></p>
+                    </div>
                 </div>
             </div>
         </div>

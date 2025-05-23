@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import registerSchema from '../../validations/registerSchema';
 
 import { AvatarComponents } from '../AvatarComponents';
@@ -111,6 +111,9 @@ export const RegisterForm = () => {
                             Enviar
                         </button>
                     </form>
+                     <div>
+                        <p>¿Tienes cuenta? <Link className='link-offset-2 link-underline link-underline-opacity-0' to="/login">Login</Link></p>
+                     </div>
                 </div>
             </div>
         </div>

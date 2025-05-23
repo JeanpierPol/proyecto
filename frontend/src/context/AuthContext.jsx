@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
 import { registerRequest, loginRequest } from "../api/auth";
 import { useFeedback } from "./FeedbackContext";
+import Cookies from 'js-cookie'
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -37,6 +38,13 @@ export const AuthProvider = ({ children }) => {
             
         }
     }
+
+    useEffect( ()=>{
+        const cookies = Cookies.get();
+        if (cookies.token) {
+            console.log(cookies.token)
+        }
+    }, [])
 
     return (
         <AuthContext.Provider
