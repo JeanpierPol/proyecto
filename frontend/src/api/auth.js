@@ -8,3 +8,5 @@ export const registerRequest = (formData) =>
       'Content-Type': 'multipart/form-data',
     },
   });
+
+export const loginRequest = (formData) => axios.post(`${API}/auth/login`, formData)

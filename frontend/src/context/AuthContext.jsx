@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import { registerRequest } from "../api/auth";
+import { registerRequest, loginRequest } from "../api/auth";
 import { useFeedback } from "./FeedbackContext";
 const AuthContext = createContext();
 
@@ -26,11 +26,24 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const signin = async (user) => {
+        try {
+            const res = await loginRequest(user);
+            console.log(res)
+            showSuccess(res.data.message)
+        } catch (error) {
+            console.log(error)
+            showError(error.response.data.error)
+            
+        }
+    }
+
     return (
         <AuthContext.Provider
             value={{
                 user,
                 signup,
+                signin,
                 IsAuthenticated,
             }}
         >

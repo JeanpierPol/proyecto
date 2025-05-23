@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import schema from './schemaValidations';
+import registerSchema from '../../validations/registerSchema';
 
 import { AvatarComponents } from '../AvatarComponents';
 import { FormComponent } from './FormComponent';
@@ -11,7 +11,7 @@ import { useAuth } from '../../context/AuthContext';
 
 export const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(registerSchema)
     });
     const { signup, IsAuthenticated } = useAuth();
     const [previewUrl, setPreviewUrl] = useState(null);

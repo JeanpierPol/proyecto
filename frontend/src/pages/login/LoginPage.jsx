@@ -1,6 +1,7 @@
+import { LoginForm } from "../../components/form/LoginForm"
 function LoginPage() {
     return (
-        <div>Login page</div>
+        <LoginForm />
     )
 }
 
