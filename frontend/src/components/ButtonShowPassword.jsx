@@ -12,7 +12,7 @@ export const ButtonShowPassword = ({ inputRef }) => {
   return (
     <button
       type="button"
-      className="btn btn-outline-secondary"
+      className="btn btn-primary"
       onClick={() => setShow(prev => !prev)}
       tabIndex={-1}
     >
