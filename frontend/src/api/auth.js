@@ -1,12 +1,10 @@
-import axios from 'axios'
-
-const API = 'http://localhost:3000/api';
+import axios from './axios'
 
 export const registerRequest = (formData) =>
-  axios.post(`${API}/auth/register`, formData, {
+  axios.post(`/auth/register`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
 
-export const loginRequest = (formData) => axios.post(`${API}/auth/login`, formData)
+export const loginRequest = (formData) => axios.post(`/auth/login`, formData)
