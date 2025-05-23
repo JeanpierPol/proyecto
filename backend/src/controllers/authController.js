@@ -29,7 +29,7 @@ const authController = {
     }
   ],
 
-  LoginUserController: [
+  loginUserController: [
     async (req, response) => {
       try {
         const { email, password } = req.body;

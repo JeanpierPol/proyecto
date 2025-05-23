@@ -16,4 +16,7 @@ router.post(
   authController.createUserController
 );
 
+router.post('/login', authController.loginUserController);
+
+
 export default router;
