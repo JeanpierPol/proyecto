@@ -3,15 +3,14 @@ import config from '../../config.js';
 import { registerUser, loginUser, editUser, getFullUserInfo } from '../service/userServices.js';
 import { createUserValidations } from '../validations/userValidations.js';
 
-
 const { SECRET_JWT_KEY } = config
 const authController = {
   createUserController: [
     ...createUserValidations,
     async (req, response) => {
       try {
-        const { name, lastName, birthDate, email, password, avatar, rol } = req.body;
-        const avatarPath = req.file ? `/uploads/${req.file.filename}` : null;
+        const { name, lastName, birthDate, email, password, rol } = req.body;
+        const avatarPath = req.file.path || null;
         const newUser = {
           name,
           lastName,

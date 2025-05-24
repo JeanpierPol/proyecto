@@ -8,7 +8,6 @@ class CRUDServices {
         try {
             const newData = new this.model(args);
             const res = await newData.save();
-            console.log(`${this.name} insertado: `, res);
             return res;
         } catch (err) {
             console.error(`Error al insertar ${this.name}:`, err);
