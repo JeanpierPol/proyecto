@@ -14,6 +14,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [IsAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { showSuccess, showError } = useFeedback();
 
     const signup = async (user) => {
@@ -54,6 +55,7 @@ export const AuthProvider = ({ children }) => {
                     setIsAuthenticated(false);
                 }
             }
+            setLoading(false);
         };
 
         checkLogin();
@@ -66,6 +68,7 @@ export const AuthProvider = ({ children }) => {
                 user,
                 signup,
                 signin,
+                loading,
                 IsAuthenticated,
             }}
         >

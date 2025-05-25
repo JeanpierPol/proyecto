@@ -19,7 +19,7 @@ const Navbar = () => {
                         <NavItem link="/register" text="Registro" />
 
                         <Dropdown text="Menú">
-                            <DropdownItem text="Perfil" link="/" />
+                            <DropdownItem text="Perfil" link="/profile" />
                         </Dropdown>
 
                     </ul>
