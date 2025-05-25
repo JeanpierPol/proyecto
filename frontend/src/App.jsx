@@ -6,7 +6,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { GlobalFeedback } from './components/GlobalFeedback';
 import Navbar from './components/navbar/Navbar';
 import LoginPage from './pages/LoginPage';
-import ProtectedRoute from './ProtectedRoute';
+import AuthRouteGuard from './AuthRouteGuard';
 
 function App() {
   return (
@@ -17,12 +17,15 @@ function App() {
             <Navbar />
             <GlobalFeedback />
             <Routes>
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='/register' element={<RegisterPage />} />
               <Route path='*' element={<h1>No found</h1>} />
+              <Route path='/' element={<h1>home</h1>} />
 
-              <Route element={<ProtectedRoute />}>
-                <Route path='/profile' element={<h1>Perfil</h1>} />
+              <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+              </Route>
+              <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
+                <Route path="/profile" element={<h1>Perfil</h1>} />
               </Route>
             </Routes>
           </BrowserRouter>
