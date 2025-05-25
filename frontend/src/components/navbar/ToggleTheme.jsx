@@ -6,9 +6,7 @@ const ToggleTheme = () => {
   const darkIcon = "bi-moon";
 
   return (
-    <button className="btn btn-primary" onClick={toggleTheme}>
-      <i className={`bi ${theme === 'dark' ? lightIcon : darkIcon}`}></i>
-    </button>
+    <i className={`bi ${theme === 'dark' ? lightIcon : darkIcon}`} onClick={toggleTheme}></i>
   );
 }
 export default ToggleTheme
