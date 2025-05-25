@@ -6,6 +6,7 @@ import fs from 'fs';
 
 import authMiddleware from './middlewares/authMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
+import storyRoutes from './routes/storyRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +28,6 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use('/api/auth', authRoutes);
-
+app.use('/api/story', storyRoutes)
 
 export default app;
