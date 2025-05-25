@@ -16,13 +16,14 @@ const Navbar = () => {
 
                         <NavItem link="/login" text="Login" />
 
-                        <NavItem link="register" text="Registro" />
+                        <NavItem link="/register" text="Registro" />
 
                         <Dropdown text="Menú">
                             <DropdownItem text="Perfil" link="/" />
                         </Dropdown>
 
                     </ul>
+                    <ToggleTheme />
                 </div>
             </div>
         </nav>

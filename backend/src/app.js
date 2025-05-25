@@ -3,10 +3,11 @@ import cors from 'cors';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import cookieParser from 'cookie-parser';
+
 
 import authMiddleware from './middlewares/authMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
-import storyRoutes from './routes/storyRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,8 +27,10 @@ if (!fs.existsSync(uploadPath)) {
 
 app.use(express.json());
 app.use(cors(corsOptions));
+app.use(cookieParser());
+
 
 app.use('/api/auth', authRoutes);
-app.use('/api/story', storyRoutes)
+
 
 export default app;

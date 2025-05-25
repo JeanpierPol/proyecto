@@ -28,4 +28,5 @@ const editUser = async (userId, updatedFields) => userService.editData(userId, u
 
 const getFullUserInfo = async (id) => userService.getDataByIdOnly(id);
 
+
 export { registerUser, loginUser, editUser, getFullUserInfo };

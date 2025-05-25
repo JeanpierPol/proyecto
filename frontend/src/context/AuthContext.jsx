@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createContext, useContext, useState } from "react";
-import { registerRequest, loginRequest } from "../api/auth";
+import { registerRequest, loginRequest, verifyTokenRequest } from "../api/auth";
 import { useFeedback } from "./FeedbackContext";
 import Cookies from 'js-cookie'
 const AuthContext = createContext();
@@ -23,28 +23,42 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(true);
             showSuccess(res.data.message)
         } catch (error) {
-            showError(error.response.data.error)
+            showError(error.response?.data?.error)
         }
     };
 
     const signin = async (user) => {
         try {
             const res = await loginRequest(user);
-            console.log(res)
+            setIsAuthenticated(true);
             showSuccess(res.data.message)
         } catch (error) {
             console.log(error)
-            showError(error.response.data.error)
-            
+            showError(error.response?.data?.error)
+
         }
     }
 
-    useEffect( ()=>{
-        const cookies = Cookies.get();
-        if (cookies.token) {
-            console.log(cookies.token)
-        }
-    }, [])
+    useEffect(() => {
+        const checkLogin = async () => {
+            const cookies = Cookies.get();
+            if (cookies.token) {
+                try {
+                    const res = await verifyTokenRequest(cookies.token);
+                    if (res.data) {
+                        setIsAuthenticated(true);
+                        setUser(res.data);
+                    }
+                } catch (error) {
+                    showError(error.response?.data?.error || "Error al verificar token");
+                    setIsAuthenticated(false);
+                }
+            }
+        };
+
+        checkLogin();
+    }, []);
+
 
     return (
         <AuthContext.Provider

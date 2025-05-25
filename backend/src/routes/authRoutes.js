@@ -18,5 +18,7 @@ router.post(
 
 router.post('/login', authController.loginUserController);
 
+router.get('/verify', authController.verifyToken);
+
 
 export default router;

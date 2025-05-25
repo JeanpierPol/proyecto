@@ -39,7 +39,7 @@ const authController = {
         const token = jwt.sign({ id: user._id, email: user.email, avatar: user.avatar, rol: user.rol }, SECRET_JWT_KEY, { expiresIn: "24h" });
         response
           .cookie('token', token, {
-            httpOnly: true,
+            httpOnly: false,
             secure: true,
             sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000
@@ -57,9 +57,9 @@ const authController = {
     async (req, res) => {
       try {
         res.clearCookie('token', {
-          httpOnly: true,
-          secure: false,
-          sameSite: 'Lax',
+          httpOnly: false,
+          secure: true,
+          sameSite: 'none',
         });
 
         res.status(200).json({ message: 'Sesión cerrada exitosamente' });
@@ -69,14 +69,36 @@ const authController = {
       }
     }
   ],
-  getMe: [
-    (req, res) => {
-      res.status(200).json({
-        id: req.userId,
-        email: req.email,
-        rol: req.rol,
-        avatar: req.avatar
-      });
+
+  verifyToken: [
+    async (req, res) => {
+      const { token } = req.cookies;
+
+      if (!token) return res.send(false);
+
+      jwt.verify(token, SECRET_JWT_KEY, async (error, user) => {
+        console.log(user)
+
+        if (error) return res.sendStatus(401);
+
+        const userFound = await getFullUserInfo(user.id);
+
+        if (!userFound) return res.sendStatus(401);
+
+        res.json({
+          id:userFound._id,
+          name: userFound.name,
+          lastName: userFound.lastName,
+          birthDate: userFound.birthDate,
+          email: userFound.email,
+          avatar:userFound.avatar,
+          rol: userFound.rol
+        
+        })
+
+      })
+
+
     }
   ],
 
