@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate, Link } from 'react-router-dom';
 import registerSchema from '../../validations/registerSchema';
-
+import { Link } from 'react-router-dom';
 import { AvatarComponents } from '../AvatarComponents';
-import { FormComponent } from './FormComponent';
-
+import { InputText } from './input/InputText';
+import { InputCheckbox } from './input/InputCheckbox';
+import { InputFile } from './input/InputFile';
 import { useAuth } from '../../context/AuthContext';
 
 export const RegisterForm = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         resolver: yupResolver(registerSchema)
     });
-    const { signup, IsAuthenticated } = useAuth();
+    const { signup } = useAuth();
     const [previewUrl, setPreviewUrl] = useState(null);
-    const navigate = useNavigate();
     const avatarFile = watch('avatar');
     const today = new Date().toISOString().split('T')[0];
 
@@ -26,13 +25,6 @@ export const RegisterForm = () => {
             return () => URL.revokeObjectURL(url);
         }
     }, [avatarFile]);
-
-    useEffect(() => {
-        if (IsAuthenticated) {
-            navigate('/');
-        }
-    }, [IsAuthenticated]);
-
 
     const inputs = [
         { name: 'name', label: 'Nombre' },
@@ -66,7 +58,7 @@ export const RegisterForm = () => {
                         <div className="row">
                             {inputs.slice(0, 2).map(input => (
                                 <div key={input.name} className="col-md-6 mb-3">
-                                    <FormComponent
+                                    <InputText
                                         {...input}
                                         register={register}
                                         error={errors[input.name]}
@@ -77,7 +69,7 @@ export const RegisterForm = () => {
                         </div>
 
                         {inputs.slice(2).map(input => (
-                            <FormComponent
+                            <InputText
                                 key={input.name}
                                 {...input}
                                 register={register}
@@ -89,7 +81,7 @@ export const RegisterForm = () => {
                         <div className="mb-3 text-center">
                             <AvatarComponents height="150" src={previewUrl} />
                         </div>
-                        <FormComponent
+                        <InputFile
                             type="file"
                             name="avatar"
                             label="avatar"
@@ -98,7 +90,7 @@ export const RegisterForm = () => {
                             watchValue={watch}
                         />
 
-                        <FormComponent
+                        <InputCheckbox
                             type="checkbox"
                             name="privacy"
                             label="Términos y condiciones"
@@ -111,9 +103,9 @@ export const RegisterForm = () => {
                             Enviar
                         </button>
                     </form>
-                     <div>
+                    <div>
                         <p>¿Tienes cuenta? <Link className='link-offset-2 link-underline link-underline-opacity-0' to="/login">Login</Link></p>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>

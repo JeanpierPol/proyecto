@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { RegisterPage } from './pages/RegisterPage';
 import { AuthProvider } from './context/AuthContext';
 import { FeedbackProvider } from './context/FeedbackContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { GlobalFeedback } from './components/GlobalFeedback';
 import Navbar from './components/navbar/Navbar';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import StoryPage from './pages/StoryPage';
 import AuthRouteGuard from './AuthRouteGuard';
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
               </Route>
               <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
                 <Route path="/profile" element={<h1>Perfil</h1>} />
+                <Route path='/story' element={<StoryPage />} /> 
+
               </Route>
             </Routes>
           </BrowserRouter>

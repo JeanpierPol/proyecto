@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { FormComponent } from './FormComponent';
+import { InputText } from './input/InputText';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import loginSchema from '../../validations/loginSchema';
@@ -29,7 +29,7 @@ export const LoginForm = () => {
                     <h2 className="card-title mb-4 text-center">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {inputs.map(input => (
-                            <FormComponent
+                            <InputText
                                 key={input.name}
                                 type={input.type}
                                 name={input.name}

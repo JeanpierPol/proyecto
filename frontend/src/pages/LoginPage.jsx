@@ -1,5 +1,5 @@
 import { LoginForm } from "../components/form/LoginForm"
-function LoginPage() {
+const LoginPage =()=> {
     return (
         <LoginForm />
     )
