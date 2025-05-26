@@ -1,4 +1,4 @@
-export const InputCheckbox = ({ name, label, register, error, className = "", ...rest }) => {
+export const InputCheckbox = ({ name, label, register, error, className = "", watchValue, ...rest }) => {
     const getValidationClass = () =>
         `form-check-input ${error ? "is-invalid" : "is-valid"} ${className}`.trim();
 

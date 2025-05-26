@@ -4,9 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from '../../validations/registerSchema';
 import { Link } from 'react-router-dom';
 import { AvatarComponents } from '../AvatarComponents';
-import { InputText } from './input/InputText';
-import { InputCheckbox } from './input/InputCheckbox';
-import { InputFile } from './input/InputFile';
+import { InputText, InputCheckbox, InputFile } from './input/index';
 import { useAuth } from '../../context/AuthContext';
 
 export const RegisterForm = () => {

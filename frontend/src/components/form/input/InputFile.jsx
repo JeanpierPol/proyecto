@@ -1,4 +1,4 @@
-export const InputFile = ({ name, label, register, error, className = "", ...rest }) => {
+export const InputFile = ({ name, label, register, error, className = "", watchValue, ...rest }) => {
     const getValidationClass = () =>
         `form-control ${error ? "is-invalid" : "is-valid"} ${className}`.trim();
 

@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { InputText } from './input/InputText';
+import { InputText } from './input/index';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import loginSchema from '../../validations/loginSchema';
