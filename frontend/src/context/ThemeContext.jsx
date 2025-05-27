@@ -7,8 +7,11 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const saved = localStorage.getItem('theme');
-    if (saved) setTheme(saved);
+    const initialTheme = saved || 'light';
+    setTheme(initialTheme);
+    document.documentElement.setAttribute('data-bs-theme', initialTheme);
   }, []);
+
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
