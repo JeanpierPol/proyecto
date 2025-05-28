@@ -37,7 +37,7 @@ export const password = yup
   .matches(/[0-9]/, 'Debe contener al menos un número')
   .matches(/[^A-Za-z0-9]/, 'Debe contener al menos un carácter especial');
 
-export const avatar = yup
+export const image = yup
   .mixed()
   .nullable()
   .notRequired()
