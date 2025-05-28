@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { name, lastName, birthDate, email, password, avatar } from './rules';
+import { name, lastName, birthDate, email, password, image } from './rules';
 
 const registerSchema = yup.object({
     name,
@@ -13,7 +13,7 @@ const registerSchema = yup.object({
         .required('Confirma tu contraseña')
         .oneOf([yup.ref('password')], 'Las contraseñas no coinciden'),
 
-    avatar,
+    avatar: image,
 
     privacy: yup
         .boolean()

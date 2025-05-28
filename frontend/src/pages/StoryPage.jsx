@@ -1,8 +1,9 @@
+import StoryForm from "../components/form/StoryForm";
 const StoryPage = ()=>{
     return(
-        <h1>
-            Historia
-        </h1>
+        <>
+        <StoryForm />
+        </>
     )
 }
 
