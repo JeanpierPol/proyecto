@@ -41,7 +41,7 @@ const StoryForm = () => {
                 <ContainerStory
                     img={
                         <>
-                            <StoryImageComponent src={previewUrl} className="w-100" />
+                            <StoryImageComponent src={previewUrl} className="w-100 mb-3" />
                             <InputFile
                                 name="coverImg"
                                 label="Portada"
@@ -56,9 +56,8 @@ const StoryForm = () => {
                             type="text"
                             name="title"
                             label="Título"
-                            error={errors.coverImg}
+                            error={errors.title}
                             register={register}
-
                             watchValue={watch}
                         />
                     }

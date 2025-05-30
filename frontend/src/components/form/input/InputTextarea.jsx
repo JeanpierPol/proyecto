@@ -13,8 +13,6 @@ export const InputTextarea = ({
 }) => {
     const inputRef = useRef(null);
     const value = watchValue?.(name);
-    const isValid = !error && Boolean(value);
-
     const { ref: registerRef, ...registeredProps } = register(name);
     return (
         <div className="input-group mb-3">
@@ -22,7 +20,7 @@ export const InputTextarea = ({
                 <textarea
                     id={name}
                     placeholder={label}
-                    className={getValidationClass({ error, base: "form-control", className })}
+                    className={getValidationClass({ error, base: "form-control", className, value })}
                     rows={rows}
                     style={{ minHeight: "100px" }}
                     ref={(el) => {

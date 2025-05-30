@@ -5,6 +5,7 @@ import { getValidationClass } from "../../../utils/formUtils";
 export const InputText = ({ type = "text", name, label, register, error, watchValue, className = "", ...rest }) => {
     const inputRef = useRef(null);
     const { ref: registerRef, ...registeredProps } = register(name);
+    const value = watchValue?.(name);
 
     return (
         <div className="input-group mb-3">
@@ -13,7 +14,7 @@ export const InputText = ({ type = "text", name, label, register, error, watchVa
                     type={type}
                     id={name}
                     placeholder={label}
-                    className={getValidationClass({ error, base: "form-control", className })}
+                    className={getValidationClass({ error, base: "form-control", className, value })}
                     ref={(el) => {
                         registerRef(el);
                         inputRef.current = el;
