@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { getValidationClass } from "../../../utils/formUtils";
 
 export const InputTextarea = ({
     name,
@@ -15,17 +16,13 @@ export const InputTextarea = ({
     const isValid = !error && Boolean(value);
 
     const { ref: registerRef, ...registeredProps } = register(name);
-
-    const getValidationClass = (base = "form-control") =>
-        `${base} ${error ? "is-invalid" : isValid ? "is-valid" : ""} ${className}`.trim();
-
     return (
         <div className="input-group mb-3">
             <div className="form-floating flex-grow-1">
                 <textarea
                     id={name}
                     placeholder={label}
-                    className={getValidationClass()}
+                    className={getValidationClass({ error, base: "form-control", className })}
                     rows={rows}
                     style={{ minHeight: "100px" }}
                     ref={(el) => {

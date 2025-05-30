@@ -1,15 +1,10 @@
 import { useRef } from "react";
 import { ButtonShowPassword } from "../../ButtonShowPassword";
+import { getValidationClass } from "../../../utils/formUtils";
 
 export const InputText = ({ type = "text", name, label, register, error, watchValue, className = "", ...rest }) => {
     const inputRef = useRef(null);
-    const value = watchValue?.(name);
-    const isValid = !error && Boolean(value);
-
     const { ref: registerRef, ...registeredProps } = register(name);
-
-    const getValidationClass = (base = "form-control") =>
-        `${base} ${error ? "is-invalid" : isValid ? "is-valid" : ""} ${className}`.trim();
 
     return (
         <div className="input-group mb-3">
@@ -18,7 +13,7 @@ export const InputText = ({ type = "text", name, label, register, error, watchVa
                     type={type}
                     id={name}
                     placeholder={label}
-                    className={getValidationClass()}
+                    className={getValidationClass({ error, base: "form-control", className })}
                     ref={(el) => {
                         registerRef(el);
                         inputRef.current = el;

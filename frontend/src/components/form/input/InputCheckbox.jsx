@@ -1,13 +1,12 @@
-export const InputCheckbox = ({ name, label, register, error, className = "", watchValue, ...rest }) => {
-    const getValidationClass = () =>
-        `form-check-input ${error ? "is-invalid" : "is-valid"} ${className}`.trim();
+import { getValidationClass } from "../../../utils/formUtils";
 
+export const InputCheckbox = ({ name, label, register, error, className = "", watchValue, ...rest }) => {
     return (
         <div className="form-check mb-3">
             <input
                 type="checkbox"
                 id={name}
-                className={getValidationClass()}
+                className={getValidationClass({ error, base: "form-check-input ", className })}
                 {...register(name)}
                 {...rest}
             />
