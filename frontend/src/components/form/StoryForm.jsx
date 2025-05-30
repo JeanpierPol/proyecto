@@ -1,11 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { InputText, InputFile } from "./input";
-import DescriptionInput from "./WYSIWYG/DescriptionInput";
+import { useState, useEffect } from 'react';
+import { InputText, InputFile, InputTextarea } from "./input";
 import storySchema from "../../validations/StorySchema";
+import ContainerStory from '../story/ContainerStory';
+import StoryImageComponent from '../imagenComponent/StoryImageComponent';
 
-const StoryEditor = () => {
+const StoryForm = () => {
     const {
         register,
         setValue,
@@ -16,44 +18,73 @@ const StoryEditor = () => {
         resolver: yupResolver(storySchema),
     });
 
+    const [previewUrl, setPreviewUrl] = useState(null);
+
+    const imagenFile = watch('coverImg')
+
+    useEffect(() => {
+        if (imagenFile && imagenFile[0]) {
+            const url = URL.createObjectURL(imagenFile[0]);
+            setPreviewUrl(url);
+            return () => URL.revokeObjectURL(url);
+        }
+    }, [imagenFile]);
+
+
     const onSubmit = (data) => {
         console.log('DATA:', data);
     };
 
     return (
-        <div className="form container">
+        <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <InputText
-                    key="title"
-                    type="text"
-                    name="title"
-                    label="Título"
-                    register={register}
-                    error={errors.title}
-                    watchValue={watch}
-                />
+                <ContainerStory
+                    img={
+                        <>
+                            <StoryImageComponent src={previewUrl} className="w-100" />
+                            <InputFile
+                                name="coverImg"
+                                label="Portada"
+                                register={register}
+                                error={errors.coverImg}
+                                watchValue={watch}
+                            />
+                        </>
+                    }
+                    title={
+                        <InputText
+                            type="text"
+                            name="title"
+                            label="Título"
+                            error={errors.coverImg}
+                            register={register}
 
-                <DescriptionInput
-                    name="description"
-                    register={register}
-                    setValue={setValue}
-                    error={errors.description}
-                    watchValue={watch}
-                />
+                            watchValue={watch}
+                        />
+                    }
+                    description={
+                        <InputTextarea
+                            name="description"
+                            label="Descripcion"
+                            register={register}
+                            error={errors.description}
+                            watchValue={watch}
+                        />
 
-                <InputFile
-                    name="coverImg"
-                    label="Portada"
-                    register={register}
-                    error={errors.coverImg}
-                    watchValue={watch} 
-                />
-                <button className="btn btn-primary w-100 mt-3" type="submit">
-                    Enviar
-                </button>
+
+                    }
+                >
+                    <button className="btn btn-primary w-100 mt-3" type="submit">
+                        Publicar
+                    </button>
+
+                </ContainerStory>
+
+
             </form>
-        </div>
+        </>
+
     );
 };
 
-export default StoryEditor;
+export default StoryForm;

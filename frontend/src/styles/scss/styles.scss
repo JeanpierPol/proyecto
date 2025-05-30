@@ -1,9 +1,10 @@
+//framework
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
 //pages
 @import './pages/register';
+@import './pages/story';
 
 //components
 @import './components/navbar';
 @import './components/form';
-
-//framework
-@import "../../../node_modules/bootstrap/scss/bootstrap";

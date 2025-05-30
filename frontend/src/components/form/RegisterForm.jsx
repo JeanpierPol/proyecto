@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from '../../validations/registerSchema';
 import { Link } from 'react-router-dom';
-import { AvatarComponents } from '../AvatarComponents';
+import AvatarComponents from '../imagenComponent/AvatarComponents';
 import { InputText, InputCheckbox, InputFile } from './input/index';
 import { useAuth } from '../../context/AuthContext';
 

@@ -1,4 +1,4 @@
-import Logo from '../Logo'
+import Logo from '../imagenComponent/Logo'
 import { Link } from 'react-router-dom'
 
 const NavbarBrand = ({link, title}) => {
