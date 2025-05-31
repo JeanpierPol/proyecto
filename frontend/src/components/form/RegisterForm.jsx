@@ -34,18 +34,21 @@ export const RegisterForm = () => {
     ];
 
     const onSubmit = async (data) => {
-        const { name, lastName, birthDate, avatar, email, password } = data;
-        let newData = {
-            name,
-            lastName,
-            birthDate,
-            avatar: avatar[0],
-            email,
-            password
-        };
+        const formData = new FormData();
+        const birthDateISO = new Date(data.birthDate).toISOString().split("T")[0];
+        formData.append("name", data.name);
+        formData.append("lastName", data.lastName);
+        formData.append("birthDate", birthDateISO);
+        formData.append("email", data.email);
+        formData.append("password", data.password);
 
-        signup(newData)
+        if (data.avatar && data.avatar[0]) {
+            formData.append("avatar", data.avatar[0]);
+        }
+
+        signup(formData);
     };
+
 
     return (
         <div className="form register container mt-5">

@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import { useStories } from '../../context/StoryContext';
 import { InputText, InputFile, InputTextarea } from "./input";
@@ -18,7 +19,7 @@ const StoryForm = () => {
     } = useForm({
         resolver: yupResolver(storySchema),
     });
-
+    const navigate = useNavigate();
     const { createStory } = useStories();
 
     const [previewUrl, setPreviewUrl] = useState(null);
@@ -43,7 +44,7 @@ const StoryForm = () => {
         if (data.coverImg && data.coverImg[0]) {
             formData.append("coverImg", data.coverImg[0]);
         }
-
+        
         createStory(formData);
     };
 
