@@ -8,30 +8,33 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StoryPage from './pages/StoryPage';
 import AuthRouteGuard from './AuthRouteGuard';
+import { StoryProvider } from './context/StoryContext';
 
 function App() {
   return (
     <ThemeProvider>
       <FeedbackProvider>
         <AuthProvider>
-          <BrowserRouter>
-            <Navbar />
-            <GlobalFeedback />
-            <Routes>
-              <Route path='*' element={<h1>No found</h1>} />
-              <Route path='/' element={<h1>home</h1>} />
+          <StoryProvider >
+            <BrowserRouter>
+              <Navbar />
+              <GlobalFeedback />
+              <Routes>
+                <Route path='*' element={<h1>No found</h1>} />
+                <Route path='/' element={<h1>home</h1>} />
 
-              <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-              </Route>
-              <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
-                <Route path="/profile" element={<h1>Perfil</h1>} />
-                <Route path='/story' element={<StoryPage />} /> 
+                <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                </Route>
+                <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
+                  <Route path="/profile" element={<h1>Perfil</h1>} />
+                  <Route path='/story' element={<StoryPage />} />
 
-              </Route>
-            </Routes>
-          </BrowserRouter>
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </StoryProvider>
         </AuthProvider>
       </FeedbackProvider>
     </ThemeProvider>

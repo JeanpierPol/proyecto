@@ -2,30 +2,31 @@ import { getAllStories, createStory } from '../service/storyService.js';
 
 const storyController = {
     getStoriesController:[
-        async (req, response) => {
+        async (req, res) => {
             try {
                 const stories = await getAllStories();
-                response.status.json(stories)
+                res.status(200).json(stories);
                 
             } catch (error) {
-                response.status(500).json({ error: error.message });
+                res.status(500).json({ error: error.message });
             }
         }
     ],
 
     createStoryController :[
-        async (req, response) => {
+        async (req, res) => {
             try {
                 // const { title, description, author, rootPage, tags, isPublic } = req.body;
                 const coverImg = req.file.path || null; 
                 const newStory ={
                     ...req.body,
-                    coverImg
+                    coverImg,
+                    author: req.userId
                 }
                 const story = await createStory(newStory);
-                response.status.json('Historia creada correctamente')
+                res.status(200).json("Hisotria creada correctamente");
             } catch (error) {
-                response.status(500).json({ error: error.message });
+                res.status(500).json({ error: error.message });
             }
         }
     ]

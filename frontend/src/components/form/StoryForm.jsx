@@ -1,7 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useState, useEffect } from 'react';
+
+import { useStories } from '../../context/StoryContext';
 import { InputText, InputFile, InputTextarea } from "./input";
 import storySchema from "../../validations/StorySchema";
 import ContainerStory from '../story/ContainerStory';
@@ -18,6 +19,8 @@ const StoryForm = () => {
         resolver: yupResolver(storySchema),
     });
 
+    const { createStory } = useStories();
+
     const [previewUrl, setPreviewUrl] = useState(null);
 
     const imagenFile = watch('coverImg')
@@ -32,7 +35,16 @@ const StoryForm = () => {
 
 
     const onSubmit = (data) => {
-        console.log('DATA:', data);
+        const formData = new FormData();
+
+        formData.append("title", data.title);
+        formData.append("description", data.description);
+
+        if (data.coverImg && data.coverImg[0]) {
+            formData.append("coverImg", data.coverImg[0]);
+        }
+
+        createStory(formData);
     };
 
     return (

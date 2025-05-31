@@ -9,4 +9,4 @@ export const registerRequest = (formData) =>
 
 export const loginRequest = (formData) => axios.post(`/auth/login`, formData)
 
-export const verifyTokenRequest = (token)=> axios.get('/auth/verify', token)
+export const verifyTokenRequest = (token) => axios.get('/auth/verify', token)
