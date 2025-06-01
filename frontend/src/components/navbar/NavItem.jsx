@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const NavItem = ({ link, text }) => {
+const NavItem = ({ link, text, children }) => {
     return (
         <li className="nav-item">
             <NavLink
@@ -9,6 +9,7 @@ const NavItem = ({ link, text }) => {
                 aria-current="page"
             >
                 {text}
+                {children}
             </NavLink>
         </li>
     );

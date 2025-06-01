@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
-const DropdownItem = ({text, link}) =>{
+const DropdownItem = ({ text, link, onClick, children }) => {
 
-    return(
+    return (
         <>
-         <li><Link className="dropdown-item" to={link}>{text}</Link></li>
+            <li>
+                <Link className="dropdown-item" to={link} onClick={onClick}>
+                    {text}
+                    {children}
+                </Link>
+            </li>
         </>
     )
 }

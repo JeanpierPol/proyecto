@@ -22,9 +22,7 @@ function App() {
               <GlobalFeedback />
               <Routes>
                 <Route path='*' element={<h1>No found</h1>} />
-                <Route path='/' element={<h1>home</h1>} />
-                <Route path='/story' element={<StoriesPage />} />
-
+                <Route path='/' element={<StoriesPage />} />
 
                 <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                   <Route path="/login" element={<LoginPage />} />
