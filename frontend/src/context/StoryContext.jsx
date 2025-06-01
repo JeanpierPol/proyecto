@@ -1,18 +1,36 @@
 import { createContext, useContext, useState } from "react";
-import { createStoryRequest, } from "../api/story";
+import { createStoryRequest, getStoriesRequest, getStoryRequest } from "../api/story";
 import { useFeedback } from "./FeedbackContext";
 const StoryContext = createContext();
 
-export const useStories = () => {
+export const useStory = () => {
     const context = useContext(StoryContext);
-    if (!context) throw new Error("useStories must be used within a StoryProvider");
+    if (!context) throw new Error("useStory must be used within a StoryProvider");
     return context;
 };
 
 export function StoryProvider({ children }) {
-    const [Stories, setStories] = useState([]);
+    const [stories, setStories] = useState([]);
     const { showSuccess, showError } = useFeedback();
 
+    const getStories = async () => {
+        try {
+            const res = await getStoriesRequest();
+            setStories(res.data);
+        } catch (error) {
+            console.log(error);
+            showError(error.response?.data?.error)
+        }
+    }
+
+    const getStory = async (id) => {
+        try {
+            const res = await getStoryRequest(id)
+        } catch (error) {
+            console.log(error);
+            showError(error.response?.data?.error)
+        }
+    }
 
     const createStory = async (story) => {
         try {
@@ -30,8 +48,10 @@ export function StoryProvider({ children }) {
     return (
         <StoryContext.Provider
             value={{
-                Stories,
+                stories,
                 createStory,
+                getStories,
+                getStory,
             }}
         >
             {children}

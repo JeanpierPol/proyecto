@@ -1,5 +1,5 @@
 import StoryForm from "../components/form/StoryForm";
-const StoryPage = ()=>{
+const CreateStoryPage = ()=>{
     return(
         <>
         <StoryForm />
@@ -7,4 +7,4 @@ const StoryPage = ()=>{
     )
 }
 
-export default StoryPage;
+export default CreateStoryPage;

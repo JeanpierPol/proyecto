@@ -1,5 +1,3 @@
-import StoryImageComponent from "../imagenComponent/StoryImageComponent"
-
 const ContainerStory = ({ img, title, description, children }) => {
     return (
         <div className="container h-100">

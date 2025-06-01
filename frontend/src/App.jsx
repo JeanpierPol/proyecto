@@ -6,9 +6,10 @@ import { GlobalFeedback } from './components/GlobalFeedback';
 import Navbar from './components/navbar/Navbar';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import StoryPage from './pages/StoryPage';
+import CreateStoryPage from './pages/CreateStoryPage';
 import AuthRouteGuard from './AuthRouteGuard';
 import { StoryProvider } from './context/StoryContext';
+import StoriesPage from './pages/StoriesPage';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
               <Routes>
                 <Route path='*' element={<h1>No found</h1>} />
                 <Route path='/' element={<h1>home</h1>} />
+                <Route path='/story' element={<StoriesPage />} />
+
 
                 <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                   <Route path="/login" element={<LoginPage />} />
@@ -29,7 +32,7 @@ function App() {
                 </Route>
                 <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
                   <Route path="/profile" element={<h1>Perfil</h1>} />
-                  <Route path='/story' element={<StoryPage />} />
+                  <Route path='/story/create' element={<CreateStoryPage />} />
 
                 </Route>
               </Routes>

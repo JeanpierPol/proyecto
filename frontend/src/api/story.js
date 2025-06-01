@@ -7,3 +7,7 @@ export const createStoryRequest = (formData) =>
       'Content-Type': 'multipart/form-data',
     },
   })
+
+export const getStoriesRequest = () => axios.get('/story');
+
+export const getStoryRequest = (id)=> axios.get(`/story/${id}`); 

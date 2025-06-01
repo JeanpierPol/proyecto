@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import { useStories } from '../../context/StoryContext';
+import { useStory } from '../../context/StoryContext';
 import { InputText, InputFile, InputTextarea } from "./input";
 import storySchema from "../../validations/StorySchema";
 import ContainerStory from '../story/ContainerStory';
@@ -20,7 +20,7 @@ const StoryForm = () => {
         resolver: yupResolver(storySchema),
     });
     const navigate = useNavigate();
-    const { createStory } = useStories();
+    const { createStory } = useStory();
 
     const [previewUrl, setPreviewUrl] = useState(null);
 

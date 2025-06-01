@@ -34,5 +34,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/story', authMiddleware, storyRoutes)
 
+app.use('/uploads', express.static(uploadPath));
+
 
 export default app;

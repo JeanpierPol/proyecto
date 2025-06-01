@@ -22,6 +22,7 @@ const Navbar = () => {
 
                         <Dropdown text="Menú">
                             <DropdownItem text="Perfil" link="/profile" />
+                            <DropdownItem text="Crear historia" link="/story/create" />
                         </Dropdown>
 
                     </ul>

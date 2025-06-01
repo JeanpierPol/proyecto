@@ -6,7 +6,7 @@ const StoryImageComponent = ({ src = defaultImagen, alt = "cover", className = "
     return (
         <img 
             src={imageSrc}
-            className={`img-fluid rounded ${className} h-75`}
+            className={`img-fluid rounded ${className} h-75 cover`}
             alt={alt}
         />
     );

@@ -11854,16 +11854,6 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.story-form > :first-child {
-  border: 2px dotted #0d6efd;
-  border-radius: 0.3rem;
-}
-.story-form.mce-edit-focus > :first-child {
-  border: none;
-  border-radius: 0;
-  padding: 0;
-}
-
 .form.container {
   max-width: 100%;
 }
@@ -11871,4 +11861,11 @@ textarea.form-control-lg {
   .form.container {
     max-width: 30%;
   }
+}
+
+.cover {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2/3;
+  object-fit: cover;
 }/*# sourceMappingURL=styles.css.map */

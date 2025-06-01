@@ -1,20 +1,12 @@
 import express from 'express';
 import storyController from '../controllers/storyController.js';
-import { multerError } from '../middlewares/errorMiddleware.js';
 import { upload } from '../middlewares/uploadMiddleware.js';
+import { generatePublicUrl } from "../middlewares/generatePublicUrl.js";
 
 
 const router = express.Router();
 
 router.get('/', storyController.getStoriesController);
-router.post(
-    '/create',
-    (req, res, next) => {
-        upload.single('coverImg')(req, res, function (err) {
-            multerError(err, req, res, next);
-        });
-    },
-    storyController.createStoryController
-);
+router.post('/create', upload.single('coverImg'), generatePublicUrl, storyController.createStoryController);
 
 export default router;

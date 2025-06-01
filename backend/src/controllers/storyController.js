@@ -16,7 +16,7 @@ const storyController = {
     createStoryController :[
         async (req, res) => {
             try {
-                const coverImg = req.file.path || null; 
+                const coverImg = req.file?.publicUrl || null;
                 const newStory ={
                     ...req.body,
                     coverImg,
