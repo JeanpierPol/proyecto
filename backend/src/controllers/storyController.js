@@ -1,4 +1,4 @@
-import { getAllStories, createStory } from '../service/storyService.js';
+import { getAllStories, createStory, getStory } from '../service/storyService.js';
 
 const storyController = {
     getStoriesController:[
@@ -7,6 +7,18 @@ const storyController = {
                 const stories = await getAllStories();
                 res.status(200).json(stories);
                 
+            } catch (error) {
+                res.status(500).json({ error: error.message });
+            }
+        }
+    ],
+
+    getStoryController:[
+        async (req, res) => {
+            try {
+                const id = req.params.id;
+                const story = await getStory(id);
+                res.status(200).json(story)
             } catch (error) {
                 res.status(500).json({ error: error.message });
             }

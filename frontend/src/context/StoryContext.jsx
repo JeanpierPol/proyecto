@@ -11,6 +11,7 @@ export const useStory = () => {
 
 export function StoryProvider({ children }) {
     const [stories, setStories] = useState([]);
+    const [story, setStory] = useState(null);
     const { showSuccess, showError } = useFeedback();
 
     const getStories = async () => {
@@ -25,7 +26,8 @@ export function StoryProvider({ children }) {
 
     const getStory = async (id) => {
         try {
-            const res = await getStoryRequest(id)
+            const res = await getStoryRequest(id);
+            setStory(res.data[0])
         } catch (error) {
             console.log(error);
             showError(error.response?.data?.error)
@@ -49,6 +51,7 @@ export function StoryProvider({ children }) {
         <StoryContext.Provider
             value={{
                 stories,
+                story,
                 createStory,
                 getStories,
                 getStory,

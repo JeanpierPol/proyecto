@@ -7,6 +7,8 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
 router.get('/', storyController.getStoriesController);
+router.get('/:id', storyController.getStoryController)
+
 router.post('/create', upload.single('coverImg'), generatePublicUrl, authMiddleware, storyController.createStoryController);
 
 export default router;

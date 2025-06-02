@@ -10,7 +10,7 @@ import CreateStoryPage from './pages/CreateStoryPage';
 import AuthRouteGuard from './AuthRouteGuard';
 import { StoryProvider } from './context/StoryContext';
 import StoriesPage from './pages/StoriesPage';
-
+import StoryPage from './pages/StoryPage';
 function App() {
   return (
     <ThemeProvider>
@@ -23,6 +23,7 @@ function App() {
               <Routes>
                 <Route path='*' element={<h1>No found</h1>} />
                 <Route path='/' element={<StoriesPage />} />
+                <Route path='/:id' element={ <StoryPage /> } />
 
                 <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                   <Route path="/login" element={<LoginPage />} />

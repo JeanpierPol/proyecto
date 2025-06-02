@@ -7,4 +7,6 @@ const createStory = (data) => storyServices.insertData(data)
 
 const getAllStories = () => storyServices.getAllData();
 
-export { createStory, getAllStories }
+const getStory = (id) =>storyServices.getDataById('_id',id);
+
+export { createStory, getAllStories, getStory }

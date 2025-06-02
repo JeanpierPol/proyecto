@@ -24,7 +24,7 @@ const Navbar = () => {
                                     <>
 
                                         <NavItem >
-                                            <AvatarComponents height="25" />
+                                            <AvatarComponents height="25" src={user.avatar} />
                                         </NavItem>
 
                                         <Dropdown text="Menú">
