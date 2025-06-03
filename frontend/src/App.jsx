@@ -11,6 +11,7 @@ import AuthRouteGuard from './AuthRouteGuard';
 import { StoryProvider } from './context/StoryContext';
 import StoriesPage from './pages/StoriesPage';
 import StoryPage from './pages/StoryPage';
+import BuildStoryPage from './pages/BuildStoryPage';
 function App() {
   return (
     <ThemeProvider>
@@ -20,10 +21,10 @@ function App() {
             <BrowserRouter>
               <Navbar />
               <GlobalFeedback />
-              <Routes>
+              <Routes>x
                 <Route path='*' element={<h1>No found</h1>} />
                 <Route path='/' element={<StoriesPage />} />
-                <Route path='/:id' element={ <StoryPage /> } />
+                <Route path='/:id' element={<StoryPage />} />
 
                 <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                   <Route path="/login" element={<LoginPage />} />
@@ -32,6 +33,7 @@ function App() {
                 <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
                   <Route path="/profile" element={<h1>Perfil</h1>} />
                   <Route path='/story/create' element={<CreateStoryPage />} />
+                  <Route path='/create/page' element={<BuildStoryPage />} />
 
                 </Route>
               </Routes>

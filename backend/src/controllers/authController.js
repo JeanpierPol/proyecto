@@ -45,7 +45,7 @@ const authController = {
             maxAge: 24 * 60 * 60 * 1000
           })
           .status(200)
-          .json({ message: "Login exitoso" });
+          .json(user);
       } catch (error) {
         const status = error.statusCode || 500;
         response.status(status).json({ error: error.message });

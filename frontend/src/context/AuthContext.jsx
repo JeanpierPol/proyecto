@@ -31,8 +31,9 @@ export const AuthProvider = ({ children }) => {
     const signin = async (user) => {
         try {
             const res = await loginRequest(user);
+            setUser(res.data);
             setIsAuthenticated(true);
-            showSuccess(res.data.message)
+            showSuccess("Login exitoso")
         } catch (error) {
             console.log(error)
             showError(error.response?.data?.error)
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const logout = () =>{
+    const logout = () => {
         Cookies.remove("token");
         setIsAuthenticated(false);
         setUser(null);
@@ -52,20 +53,23 @@ export const AuthProvider = ({ children }) => {
             if (cookies.token) {
                 try {
                     const res = await verifyTokenRequest(cookies.token);
-                    if (res.data) {
-                        setIsAuthenticated(true);
-                        setUser(res.data);
-                    }
+                    setIsAuthenticated(true);
+                    setUser(res.data);
                 } catch (error) {
                     showError(error.response?.data?.error || "Error al verificar token");
                     setIsAuthenticated(false);
+                    setUser(null);
+                } finally {
+                    setLoading(false);
                 }
+            } else {
+                setLoading(false);
             }
-            setLoading(false);
         };
 
         checkLogin();
     }, []);
+
 
 
     return (
