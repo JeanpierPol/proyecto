@@ -1,7 +1,8 @@
+import BuildStoryForm from "../components/form/BuildStoryForm";
 const BuildStoryPage = ()=>{
     return(
         <>
-            <h1>adads</h1>
+            <BuildStoryForm />
         </>
     )
 }

@@ -21,7 +21,7 @@ function App() {
             <BrowserRouter>
               <Navbar />
               <GlobalFeedback />
-              <Routes>x
+              <Routes>
                 <Route path='*' element={<h1>No found</h1>} />
                 <Route path='/' element={<StoriesPage />} />
                 <Route path='/:id' element={<StoryPage />} />
@@ -33,8 +33,7 @@ function App() {
                 <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
                   <Route path="/profile" element={<h1>Perfil</h1>} />
                   <Route path='/story/create' element={<CreateStoryPage />} />
-                  <Route path='/create/page' element={<BuildStoryPage />} />
-
+                  <Route path=':id/create/page' element={<BuildStoryPage />} />
                 </Route>
               </Routes>
             </BrowserRouter>
