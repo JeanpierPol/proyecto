@@ -86,14 +86,14 @@ const authController = {
         if (!userFound) return res.sendStatus(401);
 
         res.json({
-          id:userFound._id,
+          id: userFound._id,
           name: userFound.name,
           lastName: userFound.lastName,
           birthDate: userFound.birthDate,
           email: userFound.email,
-          avatar:userFound.avatar,
+          avatar: userFound.avatar,
           rol: userFound.rol
-        
+
         })
 
       })
