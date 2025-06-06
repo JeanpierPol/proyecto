@@ -3,7 +3,7 @@ import { createPageController, getPagesByStoryController } from '../controllers/
 
 const router = express.Router();
 
-router.post("/story/create", createPageController);
-router.get("/story/:storyId", getPagesByStoryController);
+router.post("/create", createPageController);
+router.get("/:storyId", getPagesByStoryController);
 
 export default router;

@@ -24,7 +24,7 @@ function App() {
               <Routes>
                 <Route path='*' element={<h1>No found</h1>} />
                 <Route path='/' element={<StoriesPage />} />
-                <Route path='/:id' element={<StoryPage />} />
+                <Route path='/story/:storyId' element={<StoryPage />} />
 
                 <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                   <Route path="/login" element={<LoginPage />} />
@@ -33,7 +33,7 @@ function App() {
                 <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
                   <Route path="/profile" element={<h1>Perfil</h1>} />
                   <Route path='/story/create' element={<CreateStoryPage />} />
-                  <Route path=':id/create/page' element={<BuildStoryPage />} />
+                  <Route path='/story/:storyId/page/create' element={<BuildStoryPage />} />
                 </Route>
               </Routes>
             </BrowserRouter>

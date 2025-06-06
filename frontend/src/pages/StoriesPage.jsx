@@ -14,7 +14,7 @@ const StoriesPage = () => {
             <div className="row stories">
                 {stories.map((task) => (
                     <div key={task._id} className="col-6 col-md-4 col-xl-3 mt-5">
-                        <Link to={`/${task._id}`} className="text-decoration-none">
+                        <Link to={`/story/${task._id}`} className="text-decoration-none">
                             <CardStory
                                 title={task.title}
                                 description={task.description}
