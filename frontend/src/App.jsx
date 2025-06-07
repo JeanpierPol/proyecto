@@ -12,31 +12,34 @@ import { StoryProvider } from './context/StoryContext';
 import StoriesPage from './pages/StoriesPage';
 import StoryPage from './pages/StoryPage';
 import BuildStoryPage from './pages/BuildStoryPage';
+import { PageProvider } from './context/PageContext';
 function App() {
   return (
     <ThemeProvider>
       <FeedbackProvider>
         <AuthProvider>
           <StoryProvider >
-            <BrowserRouter>
-              <Navbar />
-              <GlobalFeedback />
-              <Routes>
-                <Route path='*' element={<h1>No found</h1>} />
-                <Route path='/' element={<StoriesPage />} />
-                <Route path='/story/:storyId' element={<StoryPage />} />
+            <PageProvider >
+              <BrowserRouter>
+                <Navbar />
+                <GlobalFeedback />
+                <Routes>
+                  <Route path='*' element={<h1>No found</h1>} />
+                  <Route path='/' element={<StoriesPage />} />
+                  <Route path='/story/:storyId' element={<StoryPage />} />
 
-                <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/register" element={<RegisterPage />} />
-                </Route>
-                <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
-                  <Route path="/profile" element={<h1>Perfil</h1>} />
-                  <Route path='/story/create' element={<CreateStoryPage />} />
-                  <Route path='/story/:storyId/page/create' element={<BuildStoryPage />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
+                  <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                  </Route>
+                  <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
+                    <Route path="/profile" element={<h1>Perfil</h1>} />
+                    <Route path='/story/create' element={<CreateStoryPage />} />
+                    <Route path='/story/:storyId/page/create' element={<BuildStoryPage />} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </PageProvider>
           </StoryProvider>
         </AuthProvider>
       </FeedbackProvider>

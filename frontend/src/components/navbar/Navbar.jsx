@@ -7,8 +7,6 @@ import { useAuth } from "../../context/AuthContext";
 import AvatarComponents from "../imagenComponent/AvatarComponents";
 const Navbar = () => {
     const { IsAuthenticated, logout, user, loading } = useAuth();
-    console.log(user)
-
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">

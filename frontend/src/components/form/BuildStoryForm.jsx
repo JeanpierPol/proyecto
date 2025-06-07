@@ -1,70 +1,89 @@
-import TitlePage from "./WYSIWYG/titlePage";
-import ContentPage from "./WYSIWYG/ContentPage";
+import InputEditorInline from './WYSIWYG/InputEditorInline';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import pageSchema from '../../validations/pageSchema';
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStory } from "../../context/StoryContext";
+import { usePage } from "../../context/PageContext";
 import StoryImageComponent from "../imagenComponent/StoryImageComponent";
-import { useState } from "react";
 import Loading from "../Loading";
 
 const BuildStoryForm = () => {
     const { storyId } = useParams();
     const { getStory, story } = useStory();
+    const { createPage } = usePage();
     const [loading, setLoading] = useState(true);
 
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(pageSchema),
+    });
 
     useEffect(() => {
         if (storyId) {
             getStory(storyId).finally(() => setLoading(false));
         }
-    }, [storyId])
+    }, [storyId]);
 
     if (loading) return <Loading />;
 
-    const onclick = () => console.log(story)
+    const onSubmit = async (data) => {
+        await createPage({ ...data, storyId });
+    };
 
     return (
-        <>
-            <form onClick={onclick}>
-
-                <div className="sticky-top bg-white shadow-sm py-2">
-                    <nav className="navbar">
-                        <div className="container-fluid d-flex justify-content-between align-items-center">
-
-                            <div className="d-flex align-items-center gap-3">
-                                <StoryImageComponent
-                                    src={story.coverImg}
-                                    width={60}
-                                />
-                                <h5 className="mb-0">{story.title}</h5>
-                            </div>
-
-                            <button type="button" className="btn btn-primary">
-                                Publicar
-                            </button>
-
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="sticky-top bg-body shadow-sm py-2">
+                <nav className="navbar">
+                    <div className="container-fluid d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center gap-3">
+                            <StoryImageComponent src={story.coverImg} width={60} />
+                            <h5 className="mb-0">{story.title}</h5>
                         </div>
-                    </nav>
-                </div>
+                        <button className="btn btn-primary" type="submit">
+                            Publicar
+                        </button>
+                    </div>
+                </nav>
+            </div>
 
-                <div className="container mt-5">
-
-                    <TitlePage defaultValue="Titulo"
-
-                    />
-                    <hr />
-                    <ContentPage
-                        defaultValue="Descripcion"
-                        className="mt-5"
-
-                    />
-
-                </div>
-            </form>
-
-
-        </>
-    )
-}
+            <div className="container mt-5">
+                <InputEditorInline
+                    name="title"
+                    control={control}
+                    error={errors.title}
+                    defaultValue="Título"
+                    editorConfig={{
+                        toolbar: 'bold italic | quicklink',
+                        plugins: ['quickbars'],
+                        forced_root_block: 'h2',
+                        block_formats: 'Heading 2=h2',
+                        quickbars_insert_toolbar: false,
+                        quickbars_selection_toolbar: false,
+                    }}
+                />
+                <hr />
+                <InputEditorInline
+                    name="content"
+                    control={control}
+                    error={errors.content}
+                    defaultValue="Descripción"
+                    className="mt-5"
+                    editorConfig={{
+                        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | image link',
+                        plugins: [
+                            'autolink', 'codesample', 'link', 'lists',
+                            'media', 'powerpaste', 'table', 'image',
+                            'quickbars', 'codesample'
+                        ],
+                        contextmenu: 'undo redo | image | inserttable | cell row column deletetablet',
+                        powerpaste_word_import: 'clean',
+                        powerpaste_html_import: 'clean',
+                    }}
+                />
+            </div>
+        </form>
+    );
+};
 
 export default BuildStoryForm;
