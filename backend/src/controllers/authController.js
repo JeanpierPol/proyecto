@@ -9,15 +9,15 @@ const authController = {
     ...createUserValidations,
     async (req, response) => {
       try {
+        req.file.path
         const { name, lastName, birthDate, email, password, rol } = req.body;
-        const avatarPath = req.file.path || null;
         const newUser = {
           name,
           lastName,
           birthDate,
           email,
           password,
-          avatar: avatarPath,
+          avatar: req.file?.publicUrl || null,
           rol
         };
 

@@ -13,6 +13,8 @@ import StoriesPage from './pages/StoriesPage';
 import StoryPage from './pages/StoryPage';
 import BuildStoryPage from './pages/BuildStoryPage';
 import { PageProvider } from './context/PageContext';
+import StoryPagesViewPage from './pages/StoryPagesViewPage';
+
 function App() {
   return (
     <ThemeProvider>
@@ -27,6 +29,7 @@ function App() {
                   <Route path='*' element={<h1>No found</h1>} />
                   <Route path='/' element={<StoriesPage />} />
                   <Route path='/story/:storyId' element={<StoryPage />} />
+                  <Route path='/story/:storyId/page/' element={<StoryPagesViewPage />} />
 
                   <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                     <Route path="/login" element={<LoginPage />} />
@@ -36,6 +39,7 @@ function App() {
                     <Route path="/profile" element={<h1>Perfil</h1>} />
                     <Route path='/story/create' element={<CreateStoryPage />} />
                     <Route path='/story/:storyId/page/create' element={<BuildStoryPage />} />
+
                   </Route>
                 </Routes>
               </BrowserRouter>

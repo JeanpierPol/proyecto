@@ -5,6 +5,6 @@ const pageServices = new CRUDServices(Page, 'Page');
 
 const createPage = async (data) => await pageServices.insertData(data);
 
-const getPagesByStory = async (storyId) => await Page.find({ storyId }).populate('author', 'name avatar')
+const getPagesByStory = async (storyId) => await Page.find({ storyId }).populate('author', 'name')
 
 export { createPage, getPagesByStory };
