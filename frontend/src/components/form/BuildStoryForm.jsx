@@ -58,8 +58,6 @@ const BuildStoryForm = () => {
                         plugins: ['quickbars'],
                         forced_root_block: 'h2',
                         block_formats: 'Heading 2=h2',
-                        quickbars_insert_toolbar: false,
-                        quickbars_selection_toolbar: false,
                     }}
                 />
                 <hr />
@@ -70,15 +68,13 @@ const BuildStoryForm = () => {
                     defaultValue="Descripción"
                     className="mt-5"
                     editorConfig={{
-                        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | image link',
+                        toolbar: true,
                         plugins: [
                             'autolink', 'codesample', 'link', 'lists',
-                            'media', 'powerpaste', 'table', 'image',
+                            'media', 'table', 'image',
                             'quickbars', 'codesample'
                         ],
                         contextmenu: 'undo redo | image | inserttable | cell row column deletetablet',
-                        powerpaste_word_import: 'clean',
-                        powerpaste_html_import: 'clean',
                     }}
                 />
             </div>

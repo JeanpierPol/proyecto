@@ -1,14 +1,12 @@
 import { createPage, getPagesByStory } from "../service/pageService.js";
+import { createPageValidations } from "../validations/pageValidations.js";
 
 const createPageController = [
+    ...createPageValidations,
     async (req, res) => {
         try {
             const { storyId, title, content, parentPage } = req.body;
             const userId = req.userId;
-
-            if (!storyId || !title || !content) {
-                return res.status(400).json({ error: "Faltan campos obligatorios" });
-            }
 
             const newPage = await createPage({
                 storyId,
@@ -21,7 +19,7 @@ const createPageController = [
             res.status(201).json(newPage);
         } catch (error) {
             console.error("Error al crear página:", error);
-            res.status(500).json({ error: "Error al crear página" });
+            res.status(500).json({ error: error?.message || error });
         }
     }
 ]

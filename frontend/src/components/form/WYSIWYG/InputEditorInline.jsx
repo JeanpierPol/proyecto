@@ -4,7 +4,7 @@ import { WYSIWYGKey, config } from './editorConfig';
 
 const InputEditorInline = ({ name, control, error, defaultValue, className = '', editorConfig = {}, }) => {
     return (
-        <div className={className}>
+        <div className={`${className} tinny`}>
             <Controller
                 name={name}
                 control={control}
@@ -19,6 +19,8 @@ const InputEditorInline = ({ name, control, error, defaultValue, className = '',
                                 ...config,
                                 inline: true,
                                 menubar: false,
+                                quickbars_insert_toolbar: false,
+                                quickbars_selection_toolbar: false,
                                 ...editorConfig,
                             }}
                         />

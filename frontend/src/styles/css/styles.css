@@ -11867,4 +11867,18 @@ textarea.form-control-lg {
   height: auto;
   aspect-ratio: 2/3;
   object-fit: cover;
+}
+
+.tinny table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tinny th,
+.tinny td {
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  text-align: left;
+}
+.tinny thead {
+  background-color: #f8f9fa;
 }/*# sourceMappingURL=styles.css.map */
