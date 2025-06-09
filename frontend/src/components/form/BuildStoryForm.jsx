@@ -10,7 +10,7 @@ import StoryImageComponent from "../imagenComponent/StoryImageComponent";
 import Loading from "../Loading";
 
 const BuildStoryForm = () => {
-    const { storyId } = useParams();
+    const { storyId, pageId } = useParams();
     const { getStory, story } = useStory();
     const { createPage } = usePage();
     const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ const BuildStoryForm = () => {
     if (loading) return <Loading />;
 
     const onSubmit = async (data) => {
-        await createPage({ ...data, storyId });
+        await createPage({ ...data, storyId, pageId });
     };
 
     return (

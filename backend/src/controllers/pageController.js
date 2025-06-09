@@ -5,14 +5,14 @@ const createPageController = [
     ...createPageValidations,
     async (req, res) => {
         try {
-            const { storyId, title, content, parentPage } = req.body;
+            const { storyId, title, content, pageId } = req.body;
             const userId = req.userId;
 
             const newPage = await createPage({
                 storyId,
                 title,
                 content,
-                parentPage: parentPage || null,
+                parentPage: pageId || null,
                 author: userId
             });
 
