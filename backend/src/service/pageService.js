@@ -1,6 +1,6 @@
 import Page from "../models/Page.js";
 import CRUDServices from "./CRUDService.js";
-
+import buildPageTree from "../utils/buildPageTree.js";
 const pageServices = new CRUDServices(Page, 'Page');
 
 const createPage = async (data) => {
@@ -18,6 +18,10 @@ const createPage = async (data) => {
 
 
 
-const getPagesByStory = async (storyId) => await Page.find({ storyId }).populate('author', 'name')
+const getPagesByStory = async (storyId) => {
+    const pages = await Page.find({ storyId }).populate('author', 'name');
+    const tree = buildPageTree(pages);
+    return tree;
+};
 
 export { createPage, getPagesByStory };
