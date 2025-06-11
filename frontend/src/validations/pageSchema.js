@@ -13,7 +13,7 @@ const pageSchema = yup.object({
     .string()
     .optional(),
 
-  responseText: yup
+  answer: yup
     .string()
     .optional()
 });

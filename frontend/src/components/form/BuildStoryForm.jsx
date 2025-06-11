@@ -92,10 +92,10 @@ const BuildStoryForm = () => {
                                     <span>{ pages.question}</span>
                                     <InputText
                                         type="text"
-                                        name="responseText"
+                                        name="answer"
                                         label="Respuesta"
                                         register={register}
-                                        error={errors.responseText}
+                                        error={errors.answer}
                                         watchValue={watch}
                                     />
 

@@ -84,10 +84,10 @@
       position: relative;
       background-color: $primary;
       transition: all 0.2s ease;
-      color: $white;
+      color: $body-bg;
 
       &:hover {
-        background-color: $white; 
+        background-color: $body-bg; 
         color: $primary; 
       }
 
@@ -108,7 +108,7 @@
     }
 
     &:hover > span {
-      background-color: $white;
+      background-color: $body-bg;
       color: $primary; 
 
       &::after {

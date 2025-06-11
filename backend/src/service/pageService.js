@@ -1,22 +1,14 @@
 import Page from "../models/Page.js";
-import Answer from "../models/Answer.js";
 import CRUDServices from "./CRUDService.js";
 const pageServices = new CRUDServices(Page, 'Page');
 
 const createPage = async (data) => {
     const newPage = await pageServices.insertData(data);
     const { parentPage, _id: newPageId } = newPage;
-    const { responseText } = data
 
-    if (parentPage && responseText) {
-        const newAnswer = await Answer.create({
-            text: responseText,
-            questionPage: parentPage,
-            answerPage: newPageId
-        });
-
+    if (parentPage) {
         await pageServices.editData(parentPage, {
-            $push: { answer: newAnswer._id }
+            $push: { children: newPageId },
         });
     }
 
@@ -24,17 +16,30 @@ const createPage = async (data) => {
 };
 
 const getPagesByStory = async (storyId) => {
-    const pages = await Page.find({ storyId })
-        .populate({
-            path: 'answer',
-            populate: { path: 'answerPage' }
-        })
-        .lean();
+    const pages = await Page.find({ storyId }).lean();
 
-    const rootPages = pages.filter(page => !page.parentPage);
-    
+    const pageMap = {};
+    pages.forEach(page => {
+        page.children = [];
+        pageMap[page._id.toString()] = page;
+    });
+
+    const rootPages = [];
+
+    pages.forEach(page => {
+        if (page.parentPage) {
+            const parent = pageMap[page.parentPage.toString()];
+            if (parent) {
+                parent.children.push(page);
+            }
+        } else {
+            rootPages.push(page);
+        }
+    });
+
     return rootPages;
 };
+
 
 const getPage = (id) => pageServices.getDataById('_id', id)
 
