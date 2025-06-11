@@ -1,4 +1,5 @@
 import Page from "../models/Page.js";
+import Answer from "../models/Answer.js";
 import CRUDServices from "./CRUDService.js";
 import { ObjectId } from "mongodb"
 import buildPageTree from "../utils/buildPageTree.js";
@@ -7,10 +8,17 @@ const pageServices = new CRUDServices(Page, 'Page');
 const createPage = async (data) => {
     const newPage = await pageServices.insertData(data);
     const { parentPage, _id: newPageId } = newPage;
+    const { responseText } = data
 
-    if (parentPage) {
+    if (parentPage && responseText) {
+        const newAnswer = await Answer.create({
+            text: responseText,
+            questionPage: parentPage,
+            nextPage: newPageId
+        });
+
         await pageServices.editData(parentPage, {
-            $push: { children: newPageId },
+            $push: { answer: newAnswer._id }
         });
     }
 
@@ -44,5 +52,7 @@ const getPagesByStory = async (storyId) => {
     return result;
 };
 
+const getPage = (id) => pageServices.getDataById('_id', id)
 
-export { createPage, getPagesByStory };
+
+export { createPage, getPagesByStory, getPage };
