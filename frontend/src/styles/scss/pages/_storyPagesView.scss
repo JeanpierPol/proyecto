@@ -1,0 +1,169 @@
+.tree-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 5em;
+  padding-bottom: 5em;
+
+  h1 {
+    color: $primary; 
+    font-weight: 400;
+    margin-bottom: 2em;
+  }
+}
+
+.tree,
+.tree ul,
+.tree li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.tree {
+  margin: 0 0 1em;
+  text-align: center;
+  display: table;
+  width: 100%;
+
+  ul {
+    width: 100%;
+    display: table;
+
+    &:before {
+      outline: solid 1px $primary;
+      content: "";
+      height: 0.5em;
+      left: 50%;
+      position: absolute;
+      top: -0.5em;
+    }
+  }
+
+  li {
+    display: table-cell;
+    padding: 0.5em 0;
+    vertical-align: top;
+    position: relative;
+
+    &:not(:last-child) {
+      padding-right: 1em;
+    }
+
+    &:before {
+      outline: solid 1px $primary;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      direction: rtl;
+    }
+
+    &:hover:before {
+      outline: solid 1px $primary;
+    }
+
+    &:first-child:before {
+      left: 50%;
+    }
+
+    &:last-child:before {
+      right: 50%;
+    }
+
+    span {
+      border: solid 0.1em $primary;
+      border-radius: 0.2em;
+      display: inline-block;
+      margin: 0 0.2em 0.5em;
+      padding: 1.5rem;
+      position: relative;
+      background-color: $primary;
+      transition: all 0.2s ease;
+      color: $white;
+
+      &:hover {
+        background-color: $white; 
+        color: $primary; 
+      }
+
+      &::after {
+        outline: solid 1px $primary;
+        content: "";
+        top: -8px;
+        left: calc(50% - 5px);
+        width: 8px;
+        height: 8px;
+        background-color: $body-bg;
+        border: 1px solid $primary;
+        position: absolute;
+        opacity: 1;
+        border-radius: 100%;
+        transition: all 0.2s ease;
+      }
+    }
+
+    &:hover > span {
+      background-color: $white;
+      color: $primary; 
+
+      &::after {
+        background-color: $primary; 
+        border-color: $body-bg;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .tree li {
+    display: block;
+    width: 100%;
+    padding: 1em 0;
+    text-align: center;
+
+    &:not(:last-child) {
+      padding-right: 0;
+    }
+
+    &:before {
+      left: 50%;
+      right: 50%;
+      height: 1em;
+      top: -1em;
+    }
+
+    &:first-child:before,
+    &:last-child:before {
+      left: 50%;
+      right: 50%;
+    }
+
+    span {
+      margin: 0.5em auto;
+    }
+  }
+
+  .tree ul {
+    display: block;
+    &:before {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .tree-container {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .tree li span {
+    padding: 1rem;
+    font-size: 0.9em;
+  }
+}
