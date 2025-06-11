@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createPageRequest, getPagesByStoryRequest } from "../api/page";
+import { createPageRequest, getPagesByStoryRequest, getPageRequest } from "../api/page";
 import { useFeedback } from "./FeedbackContext";
 
 const PageContext = createContext();
@@ -38,9 +38,22 @@ export const PageProvider = ({ children }) => {
         } catch (error) {
             console.error("Error al obtener las páginas:", error);
             console.log(error)
-            showError(error.response?.data?.error || "No se pudo obtener las pagnas");
+            showError(error.response?.data?.error || "No se pudo obtener las historias");
             throw error;
 
+        }
+    }
+
+    const getPage = async (idPage) => {
+        try {
+            const res = await getPageRequest(idPage)
+            setPages(res.data[0]);
+            return res.data;
+        } catch (error) {
+            console.error("Error al obtener las páginas:", error);
+            console.log(error)
+            showError(error.response?.data?.error || "No se pudo obtener las historias");
+            throw error;
         }
     }
 
@@ -50,7 +63,8 @@ export const PageProvider = ({ children }) => {
                 pages,
                 loading,
                 createPage,
-                getPagesByStory
+                getPagesByStory,
+                getPage
             }}
         >
             {children}

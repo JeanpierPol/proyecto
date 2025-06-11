@@ -8,18 +8,14 @@ const pageSchema = yup.object({
   content: yup
     .string()
     .required('La descripción es requerida'),
-  
+
   question: yup
     .string()
     .optional(),
 
-  responses: yup
-    .array().of(
-    yup.object({
-      text: yup.string().required('La respuesta es requerida'),
-      nextPage: yup.string().required('La siguiente página es requerida'),
-    })
-  ).optional()
+  responseText: yup
+    .string()
+    .optional()
 });
 
 export default pageSchema;

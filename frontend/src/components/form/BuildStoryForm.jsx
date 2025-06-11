@@ -13,10 +13,11 @@ import Loading from "../Loading";
 const BuildStoryForm = () => {
     const { storyId, pageId } = useParams();
     const { getStory, story } = useStory();
+    const { getPage, pages } = usePage();
     const { createPage } = usePage();
     const [loading, setLoading] = useState(true);
 
-    const { control, handleSubmit,watch, register,formState: { errors } } = useForm({
+    const { control, handleSubmit, watch, register, formState: { errors } } = useForm({
         resolver: yupResolver(pageSchema),
     });
 
@@ -25,6 +26,12 @@ const BuildStoryForm = () => {
             getStory(storyId).finally(() => setLoading(false));
         }
     }, [storyId]);
+
+    useEffect(() => {
+        if (pageId) {
+            getPage(pageId).finally(() => setLoading(false));
+        }
+    }, [pageId]);
 
     if (loading) return <Loading />;
 
@@ -78,6 +85,23 @@ const BuildStoryForm = () => {
 
                     <div className="col-md-4">
                         <div className="">
+                            {
+                                pages?.question &&
+                                <div>
+                                    <h5 className="">Respuesta</h5>
+                                    <span>{ pages.question}</span>
+                                    <InputText
+                                        type="text"
+                                        name="responseText"
+                                        label="Respuesta"
+                                        register={register}
+                                        error={errors.responseText}
+                                        watchValue={watch}
+                                    />
+
+
+                                </div>
+                            }
                             <div className="">
                                 <h5 className="">Decisión</h5>
                                 <InputText
@@ -90,6 +114,7 @@ const BuildStoryForm = () => {
                                 />
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
