@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useStory } from "../../context/StoryContext";
 import { usePage } from "../../context/PageContext";
+import { InputText } from './input/index'
 import StoryImageComponent from "../imagenComponent/StoryImageComponent";
 import Loading from "../Loading";
 
@@ -15,7 +16,7 @@ const BuildStoryForm = () => {
     const { createPage } = usePage();
     const [loading, setLoading] = useState(true);
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit,watch, register,formState: { errors } } = useForm({
         resolver: yupResolver(pageSchema),
     });
 
@@ -40,45 +41,61 @@ const BuildStoryForm = () => {
                             <StoryImageComponent src={story.coverImg} width={60} />
                             <h5 className="mb-0">{story.title}</h5>
                         </div>
-                        <button className="btn btn-primary" type="submit">
-                            Publicar
-                        </button>
+                        <button className="btn btn-primary" type="submit">Publicar</button>
                     </div>
                 </nav>
             </div>
 
             <div className="container mt-5">
-                <InputEditorInline
-                    name="title"
-                    control={control}
-                    error={errors.title}
-                    defaultValue="Título"
-                    editorConfig={{
-                        toolbar: 'bold italic | quicklink',
-                        plugins: ['quickbars'],
-                        forced_root_block: 'h2',
-                        block_formats: 'Heading 2=h2',
-                    }}
-                />
-                <hr />
-                <InputEditorInline
-                    name="content"
-                    control={control}
-                    error={errors.content}
-                    defaultValue="Descripción"
-                    className="mt-5"
-                    editorConfig={{
-                        toolbar: true,
-                        plugins: [
-                            'autolink', 'codesample', 'link', 'lists',
-                            'media', 'table', 'image',
-                            'quickbars', 'codesample'
-                        ],
-                        contextmenu: 'undo redo | image | inserttable | cell row column deletetablet',
-                    }}
-                />
+                <div className="row">
+                    <div className="col-md-8">
+                        <InputEditorInline
+                            name="title"
+                            control={control}
+                            error={errors.title}
+                            defaultValue="Título"
+                            editorConfig={{
+                                toolbar: 'bold italic | quicklink',
+                                plugins: ['quickbars'],
+                                forced_root_block: 'h2',
+                                block_formats: 'Heading 2=h2',
+                            }}
+                        />
+                        <hr />
+                        <InputEditorInline
+                            name="content"
+                            control={control}
+                            error={errors.content}
+                            defaultValue="Descripción"
+                            className="mt-5"
+                            editorConfig={{
+                                toolbar: true,
+                                plugins: ['autolink', 'codesample', 'link', 'lists', 'media', 'table', 'image', 'quickbars'],
+                                contextmenu: 'undo redo | image | inserttable | cell row column deletetable',
+                            }}
+                        />
+                    </div>
+
+                    <div className="col-md-4">
+                        <div className="">
+                            <div className="">
+                                <h5 className="">Decisión</h5>
+                                <InputText
+                                    type="text"
+                                    name="question"
+                                    label="Pregunta"
+                                    register={register}
+                                    error={errors.question}
+                                    watchValue={watch}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
+
+
     );
 };
 

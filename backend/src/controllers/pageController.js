@@ -5,7 +5,7 @@ const createPageController = [
     ...createPageValidations,
     async (req, res) => {
         try {
-            const { storyId, title, content, pageId } = req.body;
+            const { storyId, title, content, pageId, question, responses } = req.body;
             const userId = req.userId;
 
             const newPage = await createPage({
@@ -13,7 +13,9 @@ const createPageController = [
                 title,
                 content,
                 parentPage: pageId || null,
-                author: userId
+                author: userId,
+                question: question || null,
+                responses: responses || null
             });
 
             res.status(201).json(newPage);
