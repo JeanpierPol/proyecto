@@ -10,7 +10,7 @@ const AnswerSchema = new mongoose.Schema({
         ref: 'Page',
         required: true,
     },
-    nextPage: {
+    answerPage: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Page',
         required: true,
