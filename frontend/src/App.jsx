@@ -4,16 +4,16 @@ import { FeedbackProvider } from './context/FeedbackContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { GlobalFeedback } from './components/GlobalFeedback';
 import Navbar from './components/navbar/Navbar';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import CreateStoryPage from './pages/CreateStoryPage';
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import CreateStoryPage from './pages/pageStory/CreateStoryPage';
 import AuthRouteGuard from './AuthRouteGuard';
 import { StoryProvider } from './context/StoryContext';
-import StoriesPage from './pages/StoriesPage';
-import StoryPage from './pages/StoryPage';
-import BuildStoryPage from './pages/BuildStoryPage';
+import StoriesPage from './pages/story/StoriesPage';
+import StoryPage from './pages/story/StoryPage';
+import BuildStoryPage from './pages/pageStory/BuildStoryPage';
 import { PageProvider } from './context/PageContext';
-import StoryPagesViewPage from './pages/StoryPagesViewPage';
+import StoryPagesViewPage from './pages/story/StoryPagesViewPage';
 
 function App() {
   return (

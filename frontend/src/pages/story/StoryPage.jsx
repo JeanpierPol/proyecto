@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import ContainerStory from "../components/story/ContainerStory";
-import { useStory } from "../context/StoryContext";
+import ContainerStory from "../../components/story/ContainerStory";
+import { useStory } from "../../context/StoryContext";
 import { Link, useParams } from "react-router-dom";
-import StoryImageComponent from "../components/imagenComponent/StoryImageComponent";
-import Loading from "../components/Loading";
+import StoryImageComponent from "../../components/imagenComponent/StoryImageComponent";
+import Loading from "../../components/Loading";
 
 const StoryPage = () => {
     const { storyId } = useParams();
@@ -36,6 +36,10 @@ const StoryPage = () => {
 
                         <div className="container">
                             <Link to={`/story/${story._id}/page/`} className="btn btn-primary btn-lg">Ver historia</Link>
+                        </div>
+
+                          <div className="container">
+                            <Link to={`/story/${story._id}/page/`} className="btn btn-primary btn-lg">Empezar a leer</Link>
                         </div>
 
                         <div className="container">

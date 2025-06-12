@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useStory } from "../context/StoryContext";
-import TreeNode from "../components/TreeNode"; 
-import Loading from "../components/Loading";
+import { useStory } from "../../context/StoryContext";
+import TreeNode from "../../components/TreeNode"; 
+import Loading from "../../components/Loading";
 
 const StoryPagesViewPage = () => {
     const { storyId } = useParams();

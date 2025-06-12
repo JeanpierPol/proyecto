@@ -1,4 +1,4 @@
-import BuildStoryForm from "../components/form/BuildStoryForm";
+import BuildStoryForm from "../../components/form/BuildStoryForm";
 const BuildStoryPage = ()=>{
     return(
         <>

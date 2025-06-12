@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useStory } from "../context/StoryContext";
-import CardStory from "../components/card/CardStory";
+import { useStory } from "../../context/StoryContext";
+import CardStory from "../../components/card/CardStory";
 import { Link } from "react-router-dom";
 
 const StoriesPage = () => {
