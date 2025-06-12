@@ -50,3 +50,13 @@ export const image = yup
     return file[0]?.size <= 5 * 1024 * 1024;
   });
 
+export const nickname = yup
+  .string()
+  .required('El nombre de usuario es obligatorio')
+  .min(3, 'El nombre de usuario debe tener al menos 3 caracteres')
+  .max(30, 'El nombre de usuario debe tener como máximo 30 caracteres')
+  .matches(
+    /^[a-zA-Z0-9_-]+$/,
+    'El nombre de usuario solo puede contener letras, números, guiones y guiones bajos'
+  )
+  .matches(/^\S+$/, 'No se permiten espacios en el nombre de usuario');

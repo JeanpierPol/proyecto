@@ -1,10 +1,11 @@
 import * as yup from 'yup';
-import { name, lastName, birthDate, email, password, image } from './rules';
+import { name, lastName, birthDate, email, password, image, nickname } from './rules';
 
 const registerSchema = yup.object({
     name,
     lastName,
     birthDate,
+    nickname,
     email,
     password,
 

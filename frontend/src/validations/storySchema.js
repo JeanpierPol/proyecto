@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { image } from './rules';
 
-const maxTitle = 10;
+const maxTitle = 30;
 const maxDescription = 20000;
 
 const storySchema = yup.object({

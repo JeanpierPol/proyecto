@@ -10,10 +10,11 @@ const authController = {
     async (req, response) => {
       try {
         req.file.path
-        const { name, lastName, birthDate, email, password, rol } = req.body;
+        const { name, lastName, birthDate, email, password, rol, nickname } = req.body;
         const newUser = {
           name,
           lastName,
+          nickname,
           birthDate,
           email,
           password,

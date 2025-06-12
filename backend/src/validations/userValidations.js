@@ -16,7 +16,11 @@ const createUserValidations = [
     body('lastName')
         .notEmpty().withMessage('El apellido es requerido')
         .isString().withMessage('El apellido debe ser texto'),
-    
+
+    body('nickname')
+        .notEmpty().withMessage('El nombre de usuario es requerido')
+        .isString().withMessage('El nombre de usuario debe ser texto'),
+
     body('birthDate')
         .notEmpty().withMessage('La fecha de nacimiento es requerida')
         .isISO8601().withMessage('La fecha debe tener un formato válido')
@@ -63,6 +67,15 @@ const editUserValidations = [
     body('name')
         .optional()
         .isString().withMessage('El nombre debe ser texto'),
+
+
+    body('lastName')
+        .notEmpty().withMessage('El apellido es requerido')
+        .isString().withMessage('El apellido debe ser texto'),
+
+    body('nickname')
+        .notEmpty().withMessage('El nombre de usuario es requerido')
+        .isString().withMessage('El nombre de usuario debe ser texto'),
 
     body('email')
         .optional()

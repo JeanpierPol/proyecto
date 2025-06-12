@@ -15,25 +15,31 @@ const StoryPage = () => {
         }
     }, [storyId])
 
+    console.log(story)
     return (
-        <div className="container h-100">
-            {story ? (
-                <ContainerStory
-                    title={
-                        <h2>{story.title}</h2>
-                    }
-                    img={
-                        <StoryImageComponent src={story.coverImg} className="w-100 mb-3 cover" />
-                    }
-                    description={
-                        <p>{story.description}</p>
-                    }
-                />
-            ) : (
-                <Loading />
-            )}
-        </div>
-
+        <>
+            <div className="container h-100 mt-3">
+                {story ? (
+                    <ContainerStory
+                        title={
+                            <h2>{story.title}</h2>
+                        }
+                        img={
+                            <StoryImageComponent src={story.coverImg} className="w-100 mb-3 cover" />
+                        }
+                        description={
+                            <p>{story.description}</p>
+                        }
+                        au
+                    />
+                ) : (
+                    <Loading />
+                )}
+            </div>
+            <div className="container">
+                
+            </div>
+        </>
     );
 
 }

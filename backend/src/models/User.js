@@ -16,11 +16,16 @@ const userSchema = new mongoose.Schema({
         required: [true, 'La fecha de nacimiento es obligatoria'],
         validate: {
             validator: function (value) {
-               return moment(value).isSameOrBefore(moment());
+                return moment(value).isSameOrBefore(moment());
             },
             message: 'La fecha de nacimiento no puede estar en el futuro',
         }
 
+    },
+    nickname: {
+        type: String,
+        required: [true, 'El nombre de usuario es obligatorio'],
+        unique: [true, 'El nombre de usuario ya está en uso']
     },
     email: {
         type: String,

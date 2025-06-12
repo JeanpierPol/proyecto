@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from '../../validations/registerSchema';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AvatarComponents from '../imagenComponent/AvatarComponents';
 import { InputText, InputCheckbox, InputFile } from './input/index';
 import { useAuth } from '../../context/AuthContext';
@@ -15,7 +15,7 @@ export const RegisterForm = () => {
     const [previewUrl, setPreviewUrl] = useState(null);
     const avatarFile = watch('avatar');
     const today = new Date().toISOString().split('T')[0];
-
+    const navigate = useNavigate();
     useEffect(() => {
         if (avatarFile && avatarFile[0]) {
             const url = URL.createObjectURL(avatarFile[0]);
@@ -27,6 +27,7 @@ export const RegisterForm = () => {
     const inputs = [
         { name: 'name', label: 'Nombre' },
         { name: 'lastName', label: 'Apellido' },
+        { name: 'nickname', label: 'Nombre de usuario', type: 'text' },
         { name: 'birthDate', label: 'Fecha de nacimiento', type: 'date', max: today },
         { name: 'email', label: 'Correo electrónico', type: 'email' },
         { name: 'password', label: 'Contraseña', type: 'password' },
@@ -38,6 +39,7 @@ export const RegisterForm = () => {
         const birthDateISO = new Date(data.birthDate).toISOString().split("T")[0];
         formData.append("name", data.name);
         formData.append("lastName", data.lastName);
+        formData.append("nickname", data.nickname);
         formData.append("birthDate", birthDateISO);
         formData.append("email", data.email);
         formData.append("password", data.password);
@@ -47,6 +49,7 @@ export const RegisterForm = () => {
         }
 
         signup(formData);
+        navigate('/login')
     };
 
 
