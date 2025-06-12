@@ -12,25 +12,32 @@ export const useStory = () => {
 export function StoryProvider({ children }) {
     const [stories, setStories] = useState([]);
     const [story, setStory] = useState(null);
+    const [loading, setLoading] = useState(false);
     const { showSuccess, showError } = useFeedback();
 
     const getStories = async () => {
+        setLoading(true);
         try {
             const res = await getStoriesRequest();
             setStories(res.data);
         } catch (error) {
             console.log(error);
             showError(error.response?.data?.error)
+        }finally{
+            setLoading(false);
         }
     }
 
     const getStory = async (id) => {
+        setLoading(true);
         try {
             const res = await getStoryRequest(id);
-            setStory(res.data[0])
+            setStory(res.data)
         } catch (error) {
             console.log(error);
             showError(error.response?.data?.error)
+        }finally{
+            setLoading(false)
         }
     }
 
@@ -52,6 +59,7 @@ export function StoryProvider({ children }) {
             value={{
                 stories,
                 story,
+                loading,
                 createStory,
                 getStories,
                 getStory,

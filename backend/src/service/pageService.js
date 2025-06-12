@@ -1,47 +1,38 @@
 import Page from "../models/Page.js";
 import CRUDServices from "./CRUDService.js";
+import Story from "../models/Story.js";
 const pageServices = new CRUDServices(Page, 'Page');
 
 const createPage = async (data) => {
     const newPage = await pageServices.insertData(data);
-    const { parentPage, _id: newPageId } = newPage;
+    const { parentPage, _id: newPageId, storyId } = newPage;
 
     if (parentPage) {
         await pageServices.editData(parentPage, {
             $push: { children: newPageId },
+        });
+    } else {
+        await Story.findByIdAndUpdate(storyId, {
+            rootPage: newPageId,
         });
     }
 
     return newPage;
 };
 
-const getPagesByStory = async (storyId) => {
-    const pages = await Page.find({ storyId }).lean();
+const getPageChildren = async (page) => {
+    await page.populate('author', 'nickname _id');
 
-    const pageMap = {};
-    pages.forEach(page => {
-        page.children = [];
-        pageMap[page._id.toString()] = page;
-    });
+    const children = await Page.find({ parentPage: page._id });
+    page.children = await Promise.all(children.map(async (child) => {
+        return await populateChildren(child);
+    }));
 
-    const rootPages = [];
-
-    pages.forEach(page => {
-        if (page.parentPage) {
-            const parent = pageMap[page.parentPage.toString()];
-            if (parent) {
-                parent.children.push(page);
-            }
-        } else {
-            rootPages.push(page);
-        }
-    });
-
-    return rootPages;
+    return page;
 };
 
 
 const getPage = (id) => pageServices.getDataById('_id', id)
 
 
-export { createPage, getPagesByStory, getPage };
+export { createPage, getPageChildren, getPage };

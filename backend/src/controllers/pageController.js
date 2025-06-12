@@ -1,4 +1,4 @@
-import { createPage, getPagesByStory, getPage } from "../service/pageService.js";
+import { createPage, getPage } from "../service/pageService.js";
 import { createPageValidations } from "../validations/pageValidations.js";
 
 const createPageController = [
@@ -26,21 +26,6 @@ const createPageController = [
     }
 ];
 
-
-const getPagesByStoryController = [
-    async (req, res) => {
-        try {
-            const { storyId } = req.params;
-            const pages = await getPagesByStory(storyId);
-            res.status(200).json(pages);
-        } catch (error) {
-            console.error("Error al obtener páginas:", error);
-            res.status(500).json({ error: "Error al obtener páginas" });
-        }
-    }
-]
-
-
 const getPageController = [
     async (req, res) => {
         try {
@@ -56,4 +41,4 @@ const getPageController = [
     }
 ]
 
-export { createPageController, getPagesByStoryController, getPageController };
+export { createPageController, getPageController };

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ContainerStory from "../components/story/ContainerStory";
 import { useStory } from "../context/StoryContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import StoryImageComponent from "../components/imagenComponent/StoryImageComponent";
 import Loading from "../components/Loading";
 
@@ -15,7 +15,6 @@ const StoryPage = () => {
         }
     }, [storyId])
 
-    console.log(story)
     return (
         <>
             <div className="container h-100 mt-3">
@@ -30,15 +29,26 @@ const StoryPage = () => {
                         description={
                             <p>{story.description}</p>
                         }
-                        au
-                    />
+                        author={
+                            <Link to={'#'} className="text-decoration-none">{story.author.nickname}</Link>
+                        }
+                    >
+
+                        <div className="container">
+                            <Link to={`/story/${story._id}/page/`} className="btn btn-primary btn-lg">Ver historia</Link>
+                        </div>
+
+                        <div className="container">
+                            <Link to={``} className="btn btn-primary btn-lg">Crear pagina</Link>
+                        </div>
+
+                    </ContainerStory>
+
                 ) : (
                     <Loading />
                 )}
             </div>
-            <div className="container">
-                
-            </div>
+
         </>
     );
 

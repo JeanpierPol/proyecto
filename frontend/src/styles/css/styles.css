@@ -11854,153 +11854,115 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.tree-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 5em;
-  padding-bottom: 5em;
-}
-.tree-container h1, .tree-container .h1 {
-  color: #0d6efd;
-  font-weight: 400;
-  margin-bottom: 2em;
-}
-
-.tree,
-.tree ul,
-.tree li {
-  list-style: none;
+.tree * {
   margin: 0;
   padding: 0;
-  position: relative;
 }
 
-.tree {
-  margin: 0 0 1em;
-  text-align: center;
-  display: table;
-  width: 100%;
-}
 .tree ul {
-  width: 100%;
-  display: table;
-}
-.tree ul:before {
-  outline: solid 1px #0d6efd;
-  content: "";
-  height: 0.5em;
-  left: 50%;
-  position: absolute;
-  top: -0.5em;
-}
-.tree li {
-  display: table-cell;
-  padding: 0.5em 0;
-  vertical-align: top;
+  padding-top: 20px;
   position: relative;
-}
-.tree li:not(:last-child) {
-  padding-right: 1em;
-}
-.tree li:before {
-  outline: solid 1px #0d6efd;
-  content: "";
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  direction: rtl;
-}
-.tree li:hover:before {
-  outline: solid 1px #0d6efd;
-}
-.tree li:first-child:before {
-  left: 50%;
-}
-.tree li:last-child:before {
-  right: 50%;
-}
-.tree li span {
-  border: solid 0.1em #0d6efd;
-  border-radius: 0.2em;
-  display: inline-block;
-  margin: 0 0.2em 0.5em;
-  padding: 1.5rem;
-  position: relative;
-  background-color: #0d6efd;
-  transition: all 0.2s ease;
-  color: #fff;
-}
-.tree li span:hover {
-  background-color: #fff;
-  color: #0d6efd;
-}
-.tree li span::after {
-  outline: solid 1px #0d6efd;
-  content: "";
-  top: -8px;
-  left: calc(50% - 5px);
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border: 1px solid #0d6efd;
-  position: absolute;
-  opacity: 1;
-  border-radius: 100%;
-  transition: all 0.2s ease;
-}
-.tree li:hover > span {
-  background-color: #fff;
-  color: #0d6efd;
-}
-.tree li:hover > span::after {
-  background-color: #0d6efd;
-  border-color: #fff;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
 }
 
-@media (max-width: 768px) {
-  .tree li {
-    display: block;
-    width: 100%;
-    padding: 1em 0;
-    text-align: center;
-  }
-  .tree li:not(:last-child) {
-    padding-right: 0;
-  }
-  .tree li:before {
-    left: 50%;
-    right: 50%;
-    height: 1em;
-    top: -1em;
-  }
-  .tree li:first-child:before, .tree li:last-child:before {
-    left: 50%;
-    right: 50%;
-  }
-  .tree li span {
-    margin: 0.5em auto;
-  }
-  .tree ul {
-    display: block;
-  }
-  .tree ul:before {
-    display: none;
-  }
+.tree li {
+  float: left;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
 }
-@media (max-width: 480px) {
-  .tree-container {
-    padding-top: 2em;
-    padding-bottom: 2em;
-  }
-  .tree li span {
-    padding: 1rem;
-    font-size: 0.9em;
-  }
+
+.tree li::before,
+.tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 50%;
+  border-top: 1px solid #0d6efd;
+  width: 50%;
+  height: 20px;
 }
+
+.tree li::after {
+  right: auto;
+  left: 50%;
+  border-left: 1px solid #0d6efd;
+}
+
+.tree li:only-child::after,
+.tree li:only-child::before {
+  display: none;
+}
+
+.tree li:only-child {
+  padding-top: 0;
+}
+
+.tree li:first-child::before,
+.tree li:last-child::after {
+  border: 0 none;
+}
+
+.tree li:last-child::before {
+  border-right: 1px solid #0d6efd;
+  border-radius: 0 5px 0 0;
+  -webkit-border-radius: 0 5px 0 0;
+  -moz-border-radius: 0 5px 0 0;
+}
+
+.tree li:first-child::after {
+  border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+  -moz-border-radius: 5px 0 0 0;
+}
+
+.tree ul ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 1px solid #0d6efd;
+  width: 0;
+  height: 20px;
+}
+
+.tree li .node-content {
+  border: 1px solid #0d6efd;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #0d6efd;
+  font-family: arial, verdana, tahoma;
+  font-size: 11px;
+  display: inline-block;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  min-width: 80px;
+}
+
+.tree li .node-content:hover,
+.tree li .node-content:hover ~ ul li .node-content {
+  background: #0d6efd;
+  color: var(--bs-body-bg);
+  border: 1px solid var(--bs-body-bg);
+}
+
+.tree li .node-content:hover ~ ul li::after,
+.tree li .node-content:hover ~ ul li::before,
+.tree li .node-content:hover ~ ul::before,
+.tree li .node-content:hover ~ ul ul::before {
+  border-color: var(--bs-body-bg);
+}
+
 .form.container {
   max-width: 100%;
 }
