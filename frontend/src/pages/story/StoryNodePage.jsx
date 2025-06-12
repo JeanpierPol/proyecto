@@ -4,7 +4,7 @@ import { useStory } from "../../context/StoryContext";
 import TreeNode from "../../components/TreeNode"; 
 import Loading from "../../components/Loading";
 
-const StoryPagesViewPage = () => {
+const StoryNodePage = () => {
     const { storyId } = useParams();
     const { story, getStory } = useStory();
 
@@ -32,4 +32,4 @@ const StoryPagesViewPage = () => {
     );
 };
 
-export default StoryPagesViewPage;
+export default StoryNodePage;

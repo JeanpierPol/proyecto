@@ -6,14 +6,14 @@ import { GlobalFeedback } from './components/GlobalFeedback';
 import Navbar from './components/navbar/Navbar';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
-import CreateStoryPage from './pages/pageStory/CreateStoryPage';
+import CreateStoryPage from './pages/story/CreateStoryPage';
 import AuthRouteGuard from './AuthRouteGuard';
 import { StoryProvider } from './context/StoryContext';
 import StoriesPage from './pages/story/StoriesPage';
 import StoryPage from './pages/story/StoryPage';
 import BuildStoryPage from './pages/pageStory/BuildStoryPage';
 import { PageProvider } from './context/PageContext';
-import StoryPagesViewPage from './pages/story/StoryPagesViewPage';
+import StoryNodePage from './pages/story/StoryNodePage';
 
 function App() {
   return (
@@ -29,7 +29,8 @@ function App() {
                   <Route path='*' element={<h1>No found</h1>} />
                   <Route path='/' element={<StoriesPage />} />
                   <Route path='/story/:storyId' element={<StoryPage />} />
-                  <Route path='/story/:storyId/page/' element={<StoryPagesViewPage />} />
+                  <Route path='/story/:storyId/page/tree' element={<StoryNodePage />} />
+                  <Route path='/story/:storyId/page/:pageId' element={<StoryNodePage />} />
 
                   <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                     <Route path="/login" element={<LoginPage />} />

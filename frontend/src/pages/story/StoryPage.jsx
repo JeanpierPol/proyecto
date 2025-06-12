@@ -35,11 +35,11 @@ const StoryPage = () => {
                     >
 
                         <div className="container">
-                            <Link to={`/story/${story._id}/page/`} className="btn btn-primary btn-lg">Ver historia</Link>
+                            <Link to={`/story/${story._id}/page/tree`} className="btn btn-primary btn-lg">Ver historia</Link>
                         </div>
 
-                          <div className="container">
-                            <Link to={`/story/${story._id}/page/`} className="btn btn-primary btn-lg">Empezar a leer</Link>
+                        <div className="container">
+                            <Link to={`/story/${story._id}/page/${story.rootPage._id}`} className="btn btn-primary btn-lg">Empezar a leer</Link>
                         </div>
 
                         <div className="container">
