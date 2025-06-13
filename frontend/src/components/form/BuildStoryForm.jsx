@@ -9,12 +9,15 @@ import { usePage } from "../../context/PageContext";
 import { InputText } from './input/index'
 import StoryImageComponent from "../imagenComponent/StoryImageComponent";
 import Loading from "../Loading";
+import { useNavigate } from "react-router-dom";
+
 
 const BuildStoryForm = () => {
     const { storyId, pageId } = useParams();
     const { getStory, story, loading: storyLoading } = useStory();
     const { getPage, pages, loading: pageLoading } = usePage();
     const { createPage } = usePage();
+    const navigate = useNavigate();
 
     const { control, handleSubmit, watch, register, formState: { errors } } = useForm({
         resolver: yupResolver(pageSchema),
@@ -35,7 +38,9 @@ const BuildStoryForm = () => {
     if (storyLoading || pageLoading || !story) return <Loading />;
 
     const onSubmit = async (data) => {
-        await createPage({ ...data, storyId, pageId });
+        const page = await createPage({ ...data, storyId, pageId });
+        navigate(`/story/${storyId}/page/${page._id}/create`)
+        
     };
 
     return (
