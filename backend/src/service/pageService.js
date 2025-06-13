@@ -20,19 +20,17 @@ const createPage = async (data) => {
     return newPage;
 };
 
-const getPageChildren = async (page) => {
-    await page.populate('author', 'nickname _id');
+const getPageWithChildren = async (pageId) => {
+    const page = await Page.findById(pageId).populate('author', 'nickname _id');
 
     const children = await Page.find({ parentPage: page._id });
-    page.children = await Promise.all(children.map(async (child) => {
-        return await getPageChildren(child);
-    }));
+
+    page.children = await Promise.all(children.map(child => getPageWithChildren(child._id)));
 
     return page;
 };
 
+const getPage = async (pageId) => await getPageWithChildren(pageId);
 
-const getPage = (id) => pageServices.getDataById('_id', id)
 
-
-export { createPage, getPageChildren, getPage };
+export { createPage, getPageWithChildren, getPage };

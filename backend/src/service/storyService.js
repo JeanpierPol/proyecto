@@ -1,6 +1,6 @@
 import Story from "../models/Story.js";
 import CRUDServices from "../service/CRUDService.js";
-import { getPageChildren } from "./pageService.js";
+import { getPageWithChildren } from "./pageService.js";
 const storyServices = new CRUDServices(Story, 'Story');
 
 const createStory = (data) => storyServices.insertData(data)
@@ -14,16 +14,15 @@ const getStory = async (storyId) => {
 
     if (!story) throw new Error('Historia no encontrada');
 
-    let rootPage = null;
-
-    if (story.rootPage) {
-        rootPage = await getPageChildren(story.rootPage);
-    }
+    const rootPage = story.rootPage
+        ? await getPageWithChildren(story.rootPage._id)
+        : null;
 
     return {
         ...story.toObject(),
         rootPage,
     };
 };
+
 
 export { createStory, getAllStories, getStory }
