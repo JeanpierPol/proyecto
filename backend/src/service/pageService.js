@@ -25,7 +25,7 @@ const getPageChildren = async (page) => {
 
     const children = await Page.find({ parentPage: page._id });
     page.children = await Promise.all(children.map(async (child) => {
-        return await populateChildren(child);
+        return await getPageChildren(child);
     }));
 
     return page;

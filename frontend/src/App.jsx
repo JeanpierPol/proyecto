@@ -14,6 +14,7 @@ import StoryPage from './pages/story/StoryPage';
 import BuildStoryPage from './pages/pageStory/BuildStoryPage';
 import { PageProvider } from './context/PageContext';
 import StoryNodePage from './pages/story/StoryNodePage';
+import ReadStoryPage from './pages/pageStory/ReadStoryPage';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
                   <Route path='/' element={<StoriesPage />} />
                   <Route path='/story/:storyId' element={<StoryPage />} />
                   <Route path='/story/:storyId/page/tree' element={<StoryNodePage />} />
-                  <Route path='/story/:storyId/page/:pageId' element={<StoryNodePage />} />
+                  <Route path='/story/:storyId/page/:pageId' element={<ReadStoryPage />} />
 
                   <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                     <Route path="/login" element={<LoginPage />} />

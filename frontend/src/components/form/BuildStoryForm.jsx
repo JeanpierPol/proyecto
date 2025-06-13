@@ -12,10 +12,9 @@ import Loading from "../Loading";
 
 const BuildStoryForm = () => {
     const { storyId, pageId } = useParams();
-    const { getStory, story } = useStory();
-    const { getPage, pages } = usePage();
+    const { getStory, story, loading: storyLoading } = useStory();
+    const { getPage, pages, loading: pageLoading } = usePage();
     const { createPage } = usePage();
-    const [loading, setLoading] = useState(true);
 
     const { control, handleSubmit, watch, register, formState: { errors } } = useForm({
         resolver: yupResolver(pageSchema),
@@ -23,17 +22,17 @@ const BuildStoryForm = () => {
 
     useEffect(() => {
         if (storyId) {
-            getStory(storyId).finally(() => setLoading(false));
+            getStory(storyId);
         }
     }, [storyId]);
 
     useEffect(() => {
         if (pageId) {
-            getPage(pageId).finally(() => setLoading(false));
+            getPage(pageId);
         }
     }, [pageId]);
 
-    if (loading) return <Loading />;
+    if (storyLoading || pageLoading || !story) return <Loading />;
 
     const onSubmit = async (data) => {
         await createPage({ ...data, storyId, pageId });
@@ -89,7 +88,7 @@ const BuildStoryForm = () => {
                                 pages?.question &&
                                 <div>
                                     <h5 className="">Respuesta</h5>
-                                    <span>{ pages.question}</span>
+                                    <span>{pages.question}</span>
                                     <InputText
                                         type="text"
                                         name="answer"

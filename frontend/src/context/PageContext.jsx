@@ -30,21 +30,8 @@ export const PageProvider = ({ children }) => {
         }
     };
 
-    const getPagesByStory = async (idStory) => {
-        try {
-            const res = await getPagesByStoryRequest(idStory)
-            setPages(res.data);
-            return res.data;
-        } catch (error) {
-            console.error("Error al obtener las páginas:", error);
-            console.log(error)
-            showError(error.response?.data?.error || "No se pudo obtener las historias");
-            throw error;
-
-        }
-    }
-
     const getPage = async (idPage) => {
+        setLoading(true)
         try {
             const res = await getPageRequest(idPage)
             setPages(res.data[0]);
@@ -54,6 +41,8 @@ export const PageProvider = ({ children }) => {
             console.log(error)
             showError(error.response?.data?.error || "No se pudo obtener las historias");
             throw error;
+        }finally{
+            setLoading(false)
         }
     }
 
@@ -63,7 +52,6 @@ export const PageProvider = ({ children }) => {
                 pages,
                 loading,
                 createPage,
-                getPagesByStory,
                 getPage
             }}
         >
