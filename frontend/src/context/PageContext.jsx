@@ -34,7 +34,7 @@ export const PageProvider = ({ children }) => {
         setLoading(true)
         try {
             const res = await getPageRequest(idPage)
-            setPages(res.data[0]);
+            setPages(res.data);
             return res.data;
         } catch (error) {
             console.error("Error al obtener las páginas:", error);
