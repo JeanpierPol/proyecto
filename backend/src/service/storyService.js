@@ -24,5 +24,6 @@ const getStory = async (storyId) => {
     };
 };
 
+const getStoryByUser = (id) => storyServices.getDataById('author', id);
 
-export { createStory, getAllStories, getStory }
+export { createStory, getAllStories, getStory, getStoryByUser }

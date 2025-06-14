@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/', storyController.getStoriesController);
 router.get('/:id', storyController.getStoryController)
+router.get('/user/:id', storyController.getStoryByUserController);
 
 router.post('/create', upload.single('coverImg'), generatePublicUrl, authMiddleware, storyController.createStoryController);
 
