@@ -30,7 +30,7 @@ const StoryPage = () => {
                             <p>{story.description}</p>
                         }
                         author={
-                            <Link to={'#'} className="text-decoration-none">{story.author.nickname}</Link>
+                            <Link to={`/user/${story?.author?._id}/story`} className="text-decoration-none">{story?.author?.nickname}</Link>
                         }
                     >
 

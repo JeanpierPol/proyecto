@@ -15,6 +15,7 @@ import BuildStoryPage from './pages/pageStory/BuildStoryPage';
 import { PageProvider } from './context/PageContext';
 import StoryNodePage from './pages/story/StoryNodePage';
 import ReadStoryPage from './pages/pageStory/ReadStoryPage';
+import UserStoryPage from './pages/story/UserStoryPage';
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
                   <Route path='/story/:storyId' element={<StoryPage />} />
                   <Route path='/story/:storyId/page/tree' element={<StoryNodePage />} />
                   <Route path='/story/:storyId/page/:pageId' element={<ReadStoryPage />} />
+                  
+                  <Route path='/user/:userId/story' element={<UserStoryPage />} />
 
                   <Route element={<AuthRouteGuard requireAuth={false} redirectTo="/" />}>
                     <Route path="/login" element={<LoginPage />} />

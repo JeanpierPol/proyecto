@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createStoryRequest, getStoriesRequest, getStoryRequest } from "../api/story";
+import { createStoryRequest, getStoriesRequest, getStoryRequest, getStoriesByUserRequest } from "../api/story";
 import { useFeedback } from "./FeedbackContext";
 const StoryContext = createContext();
 
@@ -23,7 +23,7 @@ export function StoryProvider({ children }) {
         } catch (error) {
             console.log(error);
             showError(error.response?.data?.error)
-        }finally{
+        } finally {
             setLoading(false);
         }
     }
@@ -36,7 +36,7 @@ export function StoryProvider({ children }) {
         } catch (error) {
             console.log(error);
             showError(error.response?.data?.error)
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -52,8 +52,17 @@ export function StoryProvider({ children }) {
         }
     };
 
+    const getStoryByUser = async (idUser) => {
+        setStories([]);
+        try {
+            const res = await getStoriesByUserRequest(idUser);
+            setStories(res.data);
+        } catch (error) {
+            showError(error.response?.data?.error)
+        }
+    };
 
-
+    
     return (
         <StoryContext.Provider
             value={{
@@ -63,6 +72,7 @@ export function StoryProvider({ children }) {
                 createStory,
                 getStories,
                 getStory,
+                getStoryByUser,
             }}
         >
             {children}

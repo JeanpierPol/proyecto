@@ -13,3 +13,5 @@ export const createStoryRequest = (formData) =>
 export const getStoriesRequest = () => axios.get(`${URL}`);
 
 export const getStoryRequest = (id)=> axios.get(`${URL}/${id}`); 
+
+export const getStoriesByUserRequest = (id)=> axios.get(`${URL}/user/${id}`);
