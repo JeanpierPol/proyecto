@@ -14,7 +14,7 @@ const StoryNodePage = () => {
         }
     }, [storyId]);
 
-    if (!story || !story.rootPage) {
+    if (!story) {
         return <Loading />;
     }
 

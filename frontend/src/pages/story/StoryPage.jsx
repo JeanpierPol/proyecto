@@ -39,7 +39,15 @@ const StoryPage = () => {
                         </div>
 
                         <div className="container">
-                            <Link to={`/story/${story._id}/page/${story.rootPage._id}`} className="btn btn-primary btn-lg">Empezar a leer</Link>
+                            {story.rootPage &&
+                                <Link
+                                    to={`/story/${story._id}/page/${typeof story.rootPage === 'object' ? story.rootPage._id : story.rootPage}`}
+                                    className="btn btn-primary btn-lg"
+                                >
+                                    Empezar a leer
+                                </Link>
+                            }
+
                         </div>
 
                         <div className="container">
