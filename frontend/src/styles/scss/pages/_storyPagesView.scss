@@ -100,10 +100,3 @@
   color: var(--bs-body-bg);
   border: 1px solid var(--bs-body-bg); 
 }
-
-.tree li .node-content:hover ~ ul li::after,
-.tree li .node-content:hover ~ ul li::before,
-.tree li .node-content:hover ~ ul::before,
-.tree li .node-content:hover ~ ul ul::before {
-  border-color: var(--bs-body-bg); 
-}
