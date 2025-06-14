@@ -48,8 +48,13 @@ export const RegisterForm = () => {
             formData.append("avatar", data.avatar[0]);
         }
 
-        signup(formData);
-        navigate('/login')
+        try {
+            await signup(formData);
+            navigate('/login');    
+        } catch (error) {
+            console.log(error)
+           
+        }
     };
 
 

@@ -9,14 +9,23 @@ export const FeedbackProvider = ({ children }) => {
     const [type, setType] = useState(null);
 
     const showSuccess = (text) => {
-        setMessage(text);
-        setType("success");
+        setMessage(null);
+        setType(null);
+        setTimeout(() => {
+            setMessage(text);
+            setType("success");
+        }, 50);
     };
 
     const showError = (text) => {
-        setMessage(text);
-        setType("error");
+        setMessage(null);
+        setType(null);
+        setTimeout(() => {
+            setMessage(text);
+            setType("error");
+        }, 50);
     };
+
 
     const clear = () => {
         setMessage(null);

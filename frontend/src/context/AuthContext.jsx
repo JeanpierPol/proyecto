@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
             showSuccess(res.data.message)
         } catch (error) {
             showError(error.response?.data?.error)
+            throw error;
         }
     };
 
