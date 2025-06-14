@@ -4,8 +4,22 @@ import Story from "../models/Story.js";
 const pageServices = new CRUDServices(Page, 'Page');
 
 const createPage = async (data) => {
+    const { parentPage } = data;
+
+    if (parentPage) {
+        const parent = await pageServices.getDataById('_id', parentPage);
+
+        if (!parent) {
+            throw new Error('Página padre no encontrada.');
+        }
+
+        if (!parent.question) {
+            throw new Error('No se puede ramificar una página que no tiene una pregunta.');
+        }
+    }
+
     const newPage = await pageServices.insertData(data);
-    const { parentPage, _id: newPageId, storyId } = newPage;
+    const { _id: newPageId, storyId } = newPage;
 
     if (parentPage) {
         await pageServices.editData(parentPage, {
@@ -19,6 +33,7 @@ const createPage = async (data) => {
 
     return newPage;
 };
+
 
 const getPageWithChildren = async (pageId) => {
     const page = await Page.findById(pageId).populate('author', 'nickname _id');
