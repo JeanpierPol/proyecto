@@ -9,7 +9,6 @@ const authController = {
     ...createUserValidations,
     async (req, response) => {
       try {
-        req.file.path
         const { name, lastName, birthDate, email, password, rol, nickname } = req.body;
         const newUser = {
           name,
