@@ -1,4 +1,4 @@
-import logo from '/src/assets/react.svg';
+import logo from '/src/assets/logo.svg';
 
 const Logo = ({ width, height }) => {
   const alt = 'Logo';

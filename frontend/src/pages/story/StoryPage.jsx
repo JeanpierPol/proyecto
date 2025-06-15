@@ -15,6 +15,8 @@ const StoryPage = () => {
         }
     }, [storyId])
 
+
+    console.log(story)
     return (
         <>
             <div className="container h-100 mt-3">
@@ -27,7 +29,15 @@ const StoryPage = () => {
                             <StoryImageComponent src={story.coverImg} className="w-100 mb-3 cover" />
                         }
                         description={
-                            <p>{story.description}</p>
+                            <div>
+                                <p>{story.description}</p>
+                                <h4>Categorias</h4>
+                                {story.tags && story.tags.map(tag => (
+                                    <span key={tag._id} className="badge bg-primary me-1">{tag.key}</span>
+                                ))}
+
+
+                            </div>
                         }
                         author={
                             <Link to={`/user/${story?.author?._id}/story`} className="text-decoration-none">{story?.author?.nickname}</Link>
