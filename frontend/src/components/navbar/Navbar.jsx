@@ -25,7 +25,8 @@ const Navbar = () => {
                                         <AvatarComponents height="25" src={user.avatar} />
                                     </NavItem>
                                     <Dropdown text="Menú">
-                                        <DropdownItem text="Perfil" link="/profile" />
+                                        <DropdownItem text="Mis trabajos" link={`/user/${user.id}/story`}/>
+                                        <DropdownItem text="Perfil" link="/profile"/>
                                         <DropdownItem text="Crear historia" link="/story/create" />
                                         <li><hr className="dropdown-divider" /></li>
                                         <DropdownItem text="Cerrar sesión" link="/" onClick={logout} />

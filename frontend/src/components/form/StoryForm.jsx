@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { useStory } from '../../context/StoryContext';
-import { InputText, InputFile, InputTextarea } from "./input";
+import { InputText, InputFile, InputTextarea, InputTags } from "./input";
 import storySchema from "../../validations/StorySchema";
 import ContainerStory from '../story/ContainerStory';
 import StoryImageComponent from '../imagenComponent/StoryImageComponent';
@@ -44,7 +44,7 @@ const StoryForm = () => {
         if (data.coverImg && data.coverImg[0]) {
             formData.append("coverImg", data.coverImg[0]);
         }
-        
+
         createStory(formData);
     };
 
@@ -75,17 +75,19 @@ const StoryForm = () => {
                         />
                     }
                     description={
-                        <InputTextarea
-                            name="description"
-                            label="Descripcion"
-                            register={register}
-                            error={errors.description}
-                            watchValue={watch}
-                        />
-
-
+                        <div>
+                            <InputTextarea
+                                name="description"
+                                label="Descripcion"
+                                register={register}
+                                error={errors.description}
+                                watchValue={watch}
+                            />
+                            <InputTags />
+                        </div>
                     }
                 >
+
                     <button className="btn btn-primary w-100 mt-3" type="submit">
                         Publicar
                     </button>
