@@ -1,21 +1,30 @@
 import Tags from "./tags";
+import { getValidationClass } from "../../../utils/formUtils";
 
-export const InputTags = () => {
+export const InputTags = ({ tags, register, error, watchValue }) => {
     Tags.init("select[multiple]");
+    const value = watchValue?.("tag");
     return (
         <>
-            <select class="form-select" id="validationTags" multiple data-allow-clear="true" data-clear-label="Clear">
-                <option selected disabled hidden value="">Etiquetas</option>
-                <option value="1" >JavaScript</option>
-                <option value="2">HTML5</option>
-                <option value="3">CSS3</option>
-                <option value="4">jQuery</option>
-                <option value="5">React</option>
-                <option value="6">Angular</option>
-                <option value="7">Vue</option>
-                <option value="8">Python</option>
+            <label htmlFor="validationTags" className="form-label">Etiquetas</label>
+            <select
+                className={getValidationClass({ error, base: "form-select", value })}
+                id="validationTags"
+                {...register("tag")}
+                multiple
+                data-allow-clear="true"
+                data-clear-label="Clear"
+            >
+                <option disabled hidden value="">Etiquetas</option>
+                {
+                    tags &&
+                    tags.map(tag => (
+                        <option key={tag._id} value={tag._id}>{tag.key}</option>
+                    ))
+
+                }
             </select>
-            <div class="invalid-feedback">Please select a valid tag.</div>
+            {error && <div className="invalid-feedback d-block">{error.message}</div>}
         </>
     )
 }

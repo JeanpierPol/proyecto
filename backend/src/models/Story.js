@@ -25,10 +25,11 @@ const StorySchema = new mongoose.Schema({
         default: null,
     },
 
-    tags: {
-        type: [String],
+    tags: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tag',
         default: [],
-    },
+    }],
 
     isPublic: {
         type: Boolean,
@@ -40,7 +41,7 @@ const StorySchema = new mongoose.Schema({
         default: () => moment().toDate(),
         immutable: true,
     },
-    
+
     coverImg: {
         type: String,
         default: null,

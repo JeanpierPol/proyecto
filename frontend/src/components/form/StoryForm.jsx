@@ -8,6 +8,8 @@ import { InputText, InputFile, InputTextarea, InputTags } from "./input";
 import storySchema from "../../validations/StorySchema";
 import ContainerStory from '../story/ContainerStory';
 import StoryImageComponent from '../imagenComponent/StoryImageComponent';
+import { useTag } from '../../context/TagContext';
+import Loading from '../Loading'
 
 const StoryForm = () => {
     const {
@@ -21,10 +23,11 @@ const StoryForm = () => {
     });
     const navigate = useNavigate();
     const { createStory } = useStory();
-
+    const { tags, getTags, loading } = useTag();
     const [previewUrl, setPreviewUrl] = useState(null);
 
     const imagenFile = watch('coverImg')
+
 
     useEffect(() => {
         if (imagenFile && imagenFile[0]) {
@@ -34,6 +37,13 @@ const StoryForm = () => {
         }
     }, [imagenFile]);
 
+    useEffect(() => {
+        getTags();
+    }, []);
+
+    if (loading) {
+        return <Loading />
+    }
 
     const onSubmit = (data) => {
         const formData = new FormData();
@@ -44,10 +54,11 @@ const StoryForm = () => {
         if (data.coverImg && data.coverImg[0]) {
             formData.append("coverImg", data.coverImg[0]);
         }
+        
+        data.tag.forEach(tagId => formData.append("tags[]", tagId));
 
         createStory(formData);
     };
-
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +94,13 @@ const StoryForm = () => {
                                 error={errors.description}
                                 watchValue={watch}
                             />
-                            <InputTags />
+                            <InputTags
+                                tags={tags}
+                                register={register}
+                                error={errors.tag}
+                                watchValue={watch}
+                            />
+
                         </div>
                     }
                 >

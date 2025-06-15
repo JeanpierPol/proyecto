@@ -16,6 +16,11 @@ const storySchema = yup.object({
     .max(maxDescription, `Debe tener como máximo ${maxDescription} caracteres`),
 
   coverImg: image,
+  tag: yup
+    .array()
+    .min(1, 'Debes seleccionar al menos una etiqueta')
+    .required('Las etiquetas son requeridas'),
+
 });
 
 export default storySchema;

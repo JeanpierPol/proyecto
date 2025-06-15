@@ -5,12 +5,20 @@ const storyServices = new CRUDServices(Story, 'Story');
 
 const createStory = (data) => storyServices.insertData(data)
 
-const getAllStories = () => storyServices.getAllData();
+const getAllStories = async (req, res) => {
+    const stories = await Story.find()
+        .populate('author', 'nickname _id')
+        .populate('tags', 'key translations _id');
+
+    return stories
+};
+
 
 const getStory = async (storyId) => {
     const story = await Story.findById(storyId)
         .populate('author', 'nickname _id')
-        .populate('rootPage');
+        .populate('rootPage')
+        .populate('tags', 'key translations _id');
 
     if (!story) throw new Error('Historia no encontrada');
 
