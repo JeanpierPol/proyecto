@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import cookieParser from 'cookie-parser';
 
-
+import config from '../config.js';
 import authMiddleware from './middlewares/authMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
 import storyRoutes from './routes/storyRoutes.js';
@@ -16,11 +16,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const frontendPath = path.resolve(__dirname, '../../frontend');
 const uploadPath = path.resolve(__dirname, '../uploads');
+const { FRONT_HOST } = config
 
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: FRONT_HOST,
   credentials: true
 };
 
