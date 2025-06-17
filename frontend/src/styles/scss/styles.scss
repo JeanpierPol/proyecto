@@ -1,0 +1,15 @@
+@import './variables';
+
+//framework
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+//pages
+@import './pages/register';
+@import './pages/story';
+@import './pages/storyPagesView';
+
+//components
+@import './components/navbar';
+@import './components/form';
+@import './components/img';
+@import './components/tinny'
