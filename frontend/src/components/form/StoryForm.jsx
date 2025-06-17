@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useStory } from '../../context/StoryContext';
 import { InputText, InputFile, InputTextarea, InputTags } from "./input";
-import storySchema from "../../validations/StorySchema";
+import storySchema from "../../validations/storySchema";
 import ContainerStory from '../story/ContainerStory';
 import StoryImageComponent from '../imagenComponent/StoryImageComponent';
 import { useTag } from '../../context/TagContext';
