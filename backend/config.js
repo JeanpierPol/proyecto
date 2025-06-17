@@ -15,5 +15,6 @@ export default {
     DB_USER: process.env.DB_USER || 'example_user',
     DB_PASS: process.env.DB_PASS || 'example_pass',
     DB_NAME: process.env.DB_NAME || 'example_name',
-    SECRET_JWT_KEY: process.env.SECRET_JWT_KEY
+    SECRET_JWT_KEY: process.env.SECRET_JWT_KEY, 
+    FRONT_HOST: process.env.FRONT_HOST || 'http://localhost:5173'
 };
