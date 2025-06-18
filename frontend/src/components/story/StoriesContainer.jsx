@@ -14,6 +14,7 @@ const StoriesContainer = ({ stories }) => {
                                 img={story.coverImg}
                             />
                         </Link>
+                        
                     </div>
                 ))
             ) : (

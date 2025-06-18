@@ -17,6 +17,7 @@ import StoryNodePage from './pages/story/StoryNodePage';
 import ReadStoryPage from './pages/pageStory/ReadStoryPage';
 import UserStoryPage from './pages/story/UserStoryPage';
 import { TagProvider } from './context/TagContext';
+import MyWorksPage from './pages/story/MyWorksPages';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                       <Route path='/story/create' element={<CreateStoryPage />} />
                       <Route path='/story/:storyId/page/create' element={<BuildStoryPage />} />
                       <Route path='/story/:storyId/page/:pageId/create' element={<BuildStoryPage />} />
+                      <Route path='/myworks' element={<MyWorksPage />} />
 
                     </Route>
                   </Routes>

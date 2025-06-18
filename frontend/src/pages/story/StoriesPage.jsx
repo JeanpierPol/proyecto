@@ -8,8 +8,6 @@ const StoriesPage = () => {
         getStories();
     }, [])
 
-    console.log(stories)
-
     return (
         <div className="container">
             <StoriesContainer stories={stories}
