@@ -68,7 +68,7 @@ const BranchCard = ({ page, stories }) => {
           <Link className="btn btn-outline-success btn-sm" to={`/story/${page.storyId._id}/page/${page._id}/create`}>
             <i className="bi bi-feather" /> Continuar Creando
           </Link>
-          <Link className="btn btn-outline-secondary btn-sm" to={`/story/${page.storyId._id}/page/${page._id}/branch-view`}>
+          <Link className="btn btn-outline-secondary btn-sm" to={`/story/${page.storyId._id}/page/tree`}>
             <i className="bi bi-diagram-3"></i> Ver Ramificación
           </Link>
         </div>
