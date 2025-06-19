@@ -4,17 +4,25 @@ import Story from "../models/Story.js";
 const pageServices = new CRUDServices(Page, 'Page');
 
 const createPage = async (data) => {
-    const { parentPage } = data;
+    const { parentPage, answer, question, author } = data;
 
     if (parentPage) {
-        const parent = await pageServices.getDataById('_id', parentPage);
+        const parent = await Page.findById(parentPage);
 
         if (!parent) {
             throw new Error('Página padre no encontrada.');
         }
 
-        if (!parent.question) {
-            throw new Error('No se puede ramificar una página que no tiene una pregunta.');
+        const isOwner = parent.author.toString() === author.toString();
+
+        if (parent.question) {
+            if (!answer || answer.trim() === "") {
+                throw new Error('Debes proporcionar una respuesta a la pregunta del padre.');
+            }
+        } else {
+            if (!isOwner) {
+                throw new Error('Solo el autor de esta página puede continuarla porque no contiene una pregunta.');
+            }
         }
     }
 
@@ -48,13 +56,13 @@ const getPageWithChildren = async (pageId) => {
 const getPage = async (pageId) => await getPageWithChildren(pageId);
 
 const getPageByUser = async (userId) => {
-  const pages = await Page.find({ author: userId })
-    .populate('parentPage', 'title _id')
-    .populate('children', 'title _id')
-    .populate('storyId', 'title _id')
-    .populate('author', 'nickname _id');
+    const pages = await Page.find({ author: userId })
+        .populate('parentPage', 'title _id')
+        .populate('children', 'title _id')
+        .populate('storyId', 'title _id')
+        .populate('author', 'nickname _id');
 
-  return pages;
+    return pages;
 };
 
 

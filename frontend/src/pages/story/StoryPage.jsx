@@ -44,25 +44,22 @@ const StoryPage = () => {
                         }
                     >
 
-                        <div className="container">
-                            <Link to={`/story/${story._id}/page/tree`} className="btn btn-primary btn-lg">Ver historia</Link>
-                        </div>
+                        <div className="container d-flex gap-2 mt-3">
+                            <Link to={`/story/${story._id}/page/tree`} className="btn btn-primary btn-lg">
+                                Ver Ramas
+                            </Link>
 
-                        <div className="container">
-                            {story.rootPage &&
+                            {story.rootPage && (
                                 <Link
                                     to={`/story/${story._id}/page/${typeof story.rootPage === 'object' ? story.rootPage._id : story.rootPage}`}
                                     className="btn btn-primary btn-lg"
                                 >
                                     Empezar a leer
                                 </Link>
-                            }
-
+                            )}
                         </div>
 
-                        <div className="container">
-                            <Link to={``} className="btn btn-primary btn-lg">Crear pagina</Link>
-                        </div>
+
 
                     </ContainerStory>
 
