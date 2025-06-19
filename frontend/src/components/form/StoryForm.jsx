@@ -58,6 +58,8 @@ const StoryForm = () => {
         data.tag.forEach(tagId => formData.append("tags[]", tagId));
 
         createStory(formData);
+        navigate(`/myworks`)
+
     };
     return (
         <>

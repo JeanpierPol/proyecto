@@ -47,5 +47,15 @@ const getPageWithChildren = async (pageId) => {
 
 const getPage = async (pageId) => await getPageWithChildren(pageId);
 
+const getPageByUser = async (userId) => {
+  const pages = await Page.find({ author: userId })
+    .populate('parentPage', 'title _id')
+    .populate('children', 'title _id')
+    .populate('storyId', 'title _id')
+    .populate('author', 'nickname _id');
 
-export { createPage, getPageWithChildren, getPage };
+  return pages;
+};
+
+
+export { createPage, getPageWithChildren, getPage, getPageByUser };
