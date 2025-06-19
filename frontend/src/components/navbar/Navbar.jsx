@@ -5,19 +5,26 @@ import DropdownItem from "../dropdown/DropdownItem";
 import NavbarBrand from "./NavbarBrand";
 import { useAuth } from "../../context/AuthContext";
 import AvatarComponents from "../imagenComponent/AvatarComponents";
+
 const Navbar = () => {
     const { IsAuthenticated, logout, user, loading } = useAuth();
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
-                <NavbarBrand link="/"/>
+                <NavbarBrand link="/" />
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <NavItem link="/" text="Historias" />
 
+                <div className="collapse navbar-collapse" id="navbarContent">
+                    {/* Sección izquierda */}
+                    <ul className="navbar-nav mb-2 mb-lg-0">
+                        <NavItem link="/" text="Historias" />
+                    </ul>
+
+                    {/* Sección derecha */}
+                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center">
                         {loading ? null : (
                             IsAuthenticated && user ? (
                                 <>
@@ -25,8 +32,7 @@ const Navbar = () => {
                                         <AvatarComponents height="25" src={user.avatar} />
                                     </NavItem>
                                     <Dropdown text="Menú">
-                                        <DropdownItem text="Mis trabajos" link={`/myworks`}/>
-                                        <DropdownItem text="Perfil" link="/profile"/>
+                                        <DropdownItem text="Mis trabajos" link={`/myworks`} />
                                         <DropdownItem text="Crear historia" link="/story/create" />
                                         <li><hr className="dropdown-divider" /></li>
                                         <DropdownItem text="Cerrar sesión" link="/" onClick={logout} />
@@ -39,14 +45,12 @@ const Navbar = () => {
                                 </>
                             )
                         )}
-
-
+                        <ToggleTheme />
                     </ul>
-                    <ToggleTheme />
                 </div>
             </div>
         </nav>
     );
-}
+};
 
 export default Navbar;

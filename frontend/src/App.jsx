@@ -44,7 +44,6 @@ function App() {
                       <Route path="/register" element={<RegisterPage />} />
                     </Route>
                     <Route element={<AuthRouteGuard requireAuth={true} redirectTo="/login" />}>
-                      <Route path="/profile" element={<h1>Perfil</h1>} />
                       <Route path='/story/create' element={<CreateStoryPage />} />
                       <Route path='/story/:storyId/page/create' element={<BuildStoryPage />} />
                       <Route path='/story/:storyId/page/:pageId/create' element={<BuildStoryPage />} />
